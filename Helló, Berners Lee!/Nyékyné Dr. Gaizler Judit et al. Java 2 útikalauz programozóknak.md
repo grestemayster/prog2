@@ -1,5 +1,5 @@
 # 1.fejezet
--	A Java is egy objektumorientált nyelv a C++ nyelvhez hasonlóan. A Java nyelvben írt program is 
+A Java is egy objektumorientált nyelv a C++ nyelvhez hasonlóan. A Java nyelvben írt program is 
 objektumokbó illetve osztályokból áll, az osztályok pedig metódusokból és változókból, ahogyan a C++ ban írt program is.
 A könyv egy "Hello,World!"-el mutatja be a Java fordító működését, ahol egy interpretes, azaz egy Java virtuális gép 
 értelmezi a fordítóprogram révén létrehozott bájtkódot. Ez eltér a C++ működésétől. 
