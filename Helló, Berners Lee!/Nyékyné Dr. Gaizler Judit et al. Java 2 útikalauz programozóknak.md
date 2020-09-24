@@ -8,6 +8,7 @@ A könyv szerzői itt egy HTML oldalba beépített programot mutat be példának
 Az applet forráskódjában megtalálható a feladat végrehajásához szükséges könyvtárakat elérhetővé tevő "import" szó.
 A következő 3 alfejezet először a változókkal majd a konstansokkal végezetűl pedig a megjegyzésekkel foglalkozik.
 A változók típusa lehet:
+
     * boolean - logikai true vagy false értékkel
     * char - 16 bites Unicode karakter
     * byte - 8 bites előjeles egész szám
