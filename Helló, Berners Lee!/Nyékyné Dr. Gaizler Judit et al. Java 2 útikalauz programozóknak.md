@@ -16,3 +16,7 @@ A változók típusa lehet:
     * long - 64 bites előjeles egész szám
     * float - 32 bites lebegőpontos racionális szám
     * double - 64 bites lebegőpontos racionális szám
+A konstansok ugyanúgy adhatóak meg, mint C++ esetén, a "final" kulcsszóval.
+A megjegyzések Java-ban is ugyanúgy lehetnek 1 vagy több sorosak, akár még dokumentációsak is.
+A Java nyelvben az osztályok a "class" kulcsszó használatával hozható létre.Az adattagjai illetve metódusai szabad
+sorrendben felsorolhatóak.
