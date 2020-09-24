@@ -19,4 +19,16 @@ A változók típusa lehet:
 A konstansok ugyanúgy adhatóak meg, mint C++ esetén, a "final" kulcsszóval.
 A megjegyzések Java-ban is ugyanúgy lehetnek 1 vagy több sorosak, akár még dokumentációsak is.
 A Java nyelvben az osztályok a "class" kulcsszó használatával hozható létre.Az adattagjai illetve metódusai szabad
-sorrendben felsorolhatóak.
+sorrendben felsorolhatóak. Ha a "public" kulcsszót használjuk, akkor a külvilág számára láthtató, azonban ha a "protected"
+ vagy a "private" kulcsszavakat használjuk, akkor az ekőzőnél csak a leszármazottak, utóbbi esetben viszot senki másnak sem látható.
+A könyv a példákban megjelenít egy új tipust, a "String"-et. Ez az osztály a karakterláncok kezelésére lett létrehozva, ami eltér a
+C++ hoz képest, ahol ez a típus a karakterek tömbje volt.
+Ha az osztályunk megvan, akkor a "new" operátort segítségűl véve objektumot is létre tudunk hozni.
+Az operátor az új objektum számára helyet foglal le és erre a területre vonatkozó referenciával tér vissza. 
+A könyv említi a "static" kulcsszót is, amellyel ha deklarálunk egy elemet, akkor az elem magához az osztályhoz
+fog tartozni. A Java-ban is fontos hogy egy nem elvárt helyzetben a program hogyan is reagál. Ez a kivételkezelés, 
+amely C++ ban is így működik.
+A könyv kitér a biztonságra is, amit az adott igényhez lehet igazítani.Ennek a segítségével megtudjuk határozni
+hogy egy adott kódrészletnek mihez is van hozzáférése.
+Az AWT (Abstract Window Toolkit) nagyban segít a program felhasználói grafikai felület 
+kivitelezésében.
