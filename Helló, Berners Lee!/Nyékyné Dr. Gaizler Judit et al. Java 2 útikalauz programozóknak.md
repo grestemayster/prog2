@@ -16,11 +16,12 @@ A változók típusa lehet:
     * long - 64 bites előjeles egész szám
     * float - 32 bites lebegőpontos racionális szám
     * double - 64 bites lebegőpontos racionális szám
+
 A konstansok ugyanúgy adhatóak meg, mint C++ esetén, a "final" kulcsszóval.
 A megjegyzések Java-ban is ugyanúgy lehetnek 1 vagy több sorosak, akár még dokumentációsak is.
 A Java nyelvben az osztályok a "class" kulcsszó használatával hozható létre.Az adattagjai illetve metódusai szabad
 sorrendben felsorolhatóak. Ha a "public" kulcsszót használjuk, akkor a külvilág számára láthtató, azonban ha a "protected"
- vagy a "private" kulcsszavakat használjuk, akkor az ekőzőnél csak a leszármazottak, utóbbi esetben viszot senki másnak sem látható.
+vagy a "private" kulcsszavakat használjuk, akkor az ekőzőnél csak a leszármazottak, utóbbi esetben viszot senki másnak sem látható.
 A könyv a példákban megjelenít egy új tipust, a "String"-et. Ez az osztály a karakterláncok kezelésére lett létrehozva, ami eltér a
 C++ hoz képest, ahol ez a típus a karakterek tömbje volt.
 Ha az osztályunk megvan, akkor a "new" operátort segítségűl véve objektumot is létre tudunk hozni.
