@@ -1,0 +1,49 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Arroway!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+
+    <section>
+        <title>OO szemlélet</title>
+        <para>A módosított polártranszformációs normális generátor beprogramozása Java nyelven. Mutassunk rá, hogy a mi természetes saját megoldásunk (az algoritmus egyszerre két normálist állít elő, kell egy példánytag, amely a nem visszaadottat tárolja és egy logikai tag, hogy van-e tárolt vagy futtatni kell az algot.) és az OpenJDK, Oracle JDK-ban a Sun által adott OO szervezés ua.!https://arato.inf.unideb.hu/batfai.norbert/UDPROG/deprecated/Prog1_5.pdf(16-22 fólia)Ugyanezt írjuk meg C++ nyelven is! (lásd még UDPROG repó: source/labor/polargen)
+        </para>
+        <para>
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:  https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Arroway!/oo              
+        </para>
+        <para>
+        Az algoritmus elkészítése "public" "PolárGenerátor" osztályban történik.
+        Deklarálunk egy "nincsTárolt" változót is, amely "boolean" típusú.
+        Deklarálunk egy "tárolt" változót is, amely "double" típusú.
+        Deklarálunk egy "következő" "double" típusú fgv-t is.
+        Amennyiben a "nincsTárolt" igaz,
+        	akkor egy do-while cikluson belül a "Math.random+ függvényt használva "u1" illetve "u2" egy véletlen értéket kap, addig ameddig "w" nagyobb mint 1. "v1" illetve "v2" megkapja az előző változók értékeit, ahogy "w" is. Utána kiszámoljuk az "r" értékét is, ahol már a "tárolt" változónk is értéket kap.
+        Ha hamis,
+        	akkor a fgv a már eltárolt elemet adja vissza.
+                </para>
+    </section>        
+
+    <section>
+        <title>„Gagyi”</title>
+        <para>Az  ismert  formális2„while  (x  &amp;  x  >=  t   t  !=  x);” tesztkérdéstípusraadj  a  szokásosnál (miszerint  x,  t  az  egyik  esetben  az  objektum  által  hordozott  érték,  a  másikban  meg  az  objektum referenciája) „mélyebb” választ,  írj  Java  példaprogramot  mely  egyszer  végtelen  ciklus,  más  x,  t értékekkel meg nem! A példát építsd a JDK Integer.java forrására3, hogy a 128-nál inkluzív objektum példányokat poolozza!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:                
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+    </section>        
+        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</chapter>                
