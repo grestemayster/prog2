@@ -1,0 +1,115 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Liskov!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+
+    <section>
+        <title>Anti OO</title>
+        <para>
+        A BBP algoritmussal a Pi hexadecimális kifejtésének a 0. pozíciótól számított 10^6, 10^7, 10^8darab jegyét határozzuk meg C, C++, Java és C# nyelveken és vessük össze a futási időket! https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitok-javat/apas03.html#id561066
+        </para>
+        <para>
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:               
+        </para>
+        <para>
+        fordítás/futtatás:</para>
+        <para> C:</para>
+		<para>g++ pi_bbp_bench.c -o pi_bbp_bench -lm </para>
+		<para>./pi_bbp_bench</para>
+
+	 <para>C++</para>
+	 	<para>g++ BBP_test.cpp -o bbpTest</para>
+	 	<para>./bbpTest</para>
+	 
+	 <para>Java</para>
+	 	<para>javac PiBBPBench.java</para>
+	 	<para>java PiBBPBench </para>
+	 
+	 <para>C# </para>
+	 	<para>mcs PiBBPBench.cs </para>
+	 	<para>mono PiBBPBench.exe</para>
+        
+        <para>C:</para>
+        <para>Kapott eredmények:</para>
+         <para>C:</para>
+        <para>10^6 =2,111283</para>
+        <para>10^7 =24,401839</para>
+        <para>10^8 =282,93285</para>
+        
+         <para>C++:</para>
+        <para>10^6 =2,44803</para>
+        <para>10^7 =27,7696</para>
+        <para>10^8 =313,902</para>
+        
+        
+         <para>Java:</para>
+        <para>10^6 =1,883</para>
+        <para>10^7 =22,144</para>
+        <para>10^8 =248,324</para>
+        
+        
+         <para>C#:</para>
+        <para>10^6 =1,922333</para>
+        <para>10^7 =22,595576</para>
+        <para>10^8 =256,861381</para>
+        
+        
+    </section>        
+
+    <section>
+        <title>Szülő-gyerek</title>
+        <para>Írjunk Szülő-gyerek Java és C++ osztálydefiníciót, amelyben demonstrálni tudjuk, hogy az ősön keresztül csak az ős üzenetei küldhetőek!https://arato.inf.unideb.hu/batfai.norbert/UDPROG/deprecated/Prog2_1.pdf(98. fólia)
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:             
+        </para>
+        <para>
+            
+        </para>
+    </section>  
+    
+    <section>
+        <title>Liskov helyettesítés sértése</title>
+        <para>Írjunk olyan OO, leforduló Java és C++ kódcsipetet, amely megsérti a Liskov elvet! Mutassunk rá a megoldásra: jobb OO tervezés.
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:             
+        </para>
+        <para>
+        A Liskov-féle behelyettesítési elv, rövid nevén LSP a következőt mondja ki: </para>
+        <para>Ha S osztály a T osztály leszármazottja, akkor S szabadon behelyettesíthető a programunkban minden olyan helyre (őaraméter,változó... ), ahol eredetileg T szülő típust várnánk
+      	      
+        </para>
+        <para>
+            fordítás/futtatás:
+        </para>
+        <para>C++</para>
+	 	<para>g++ Liskovsertes.cpp -o Liskovsertes</para>
+	 	<para>./Liskovsertes</para>
+	 
+	 <para>Java</para>
+	 	<para>javac Liskovsertes.java </para>
+	 	<para>java Liskovsertes</para>
+	 <para></para>
+	 <para>Mind a kettő esetben azt kapjuk vissza, hogy az Ebr tud láncot javítani, ami nem lehetséges mert az ebr egy kerekes tank.</para>
+	 	
+	 	
+	
+    </section>       
+        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</chapter>                
