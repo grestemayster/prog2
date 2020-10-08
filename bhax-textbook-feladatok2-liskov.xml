@@ -109,7 +109,60 @@
 	 	
 	 	
 	
-    </section>       
+    </section> 
+
+
+    <section>
+        <title>EPAM:
+Interfész evolúció Java ban</title>
+        <para>Írjunk Szülő-gyerek Java és C++ osztálydefiníciót, amelyben demonstrálni tudjuk, hogy az ősön keresztül csak az ős üzenetei küldhetőek!https://arato.inf.unideb.hu/batfai.norbert/UDPROG/deprecated/Prog2_1.pdf(98. fólia)
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para> A Java 7 2011-ben jelent meg.   </para>           
+        <para>Ez volt az első nagyobb Java-frissítés, miután az Oracle megszerezte a Sun Microsystems-t.  </para>
+        <para> A Java 7 a végső Java-verzió, amely hivatalosan támogatná a Windows XP-t.</para>
+        <para> </para>
+        <para>A Java 7 tartalmazott néhány olyan főbb funkciót, mint például: </para>
+        <para>Tömörített 64 bites mutatók.</para>
+        <para>Frissített class-loader architektúra.</para>
+        <para>Több kivétel kezelése.</para>
+        <para>JVM támogatás a nyelvek dinamikus támogatásához.</para>
+        <para>Frissített 1.1 sor és JDBC 4.1.</para>
+        <para>Karakterlánc objektum egy kapcsoló utasításban.</para>
+        <para>Automatikus erőforrás-kezelés try utasításban és még sok más. </para>
+        <para> </para>
+        <para>Java7 vs. Java8 </para>
+        <para> Lambda kifejezések</para>
+        <para> A lambda kifejezések csak törzset és paraméterlistát tartalmaznak.</para>
+        <para> A Lambda Expressions használatának előnyei,</para>
+        <para> Továbbfejlesztett iteratív szintaxis.</para>
+        <para> Olvashatóság.</para>
+        <para> Kód újrafelhasználása.</para>
+        <para> JAR fájlméret csökkentése.</para>
+        <para>Egyszerűsített változó hatóköre.</para>
+        <para> A funkcionális programozás ösztönzése.</para>
+        <para> Null Referencia Sablon,Nevezhetjük Java Opcionális Osztálynak is.</para>
+        <para> A Java Optional osztály használatának előnyei: </para>
+        <para>Nincs semmiféle kivétel a futás közben. </para>
+        <para>Tiszta API-k fejleszthetők. </para>
+        <para>Nincs szükség semmilyen ellenőrzésre.</para>
+        <para>Új dátum és idő API </para>
+        <para> A java.util.Date osztályban az évek 1900-tól kezdődnek, a hónapok pedig 0-tól kezdődnek. Ezért fontos tudni, mivel amikor egy évet és egy hónapot szeretnénk kijelölni, annak a következőnek kell lennie: (ÉÉÉÉ-1900) és (HH) -1). Ezt a Java 8 legyőzte a java.time csomagban található osztályok használatával.</para>
+        <para>Az egész számtól vagy a karaktersorozattól eltérõen a Dátum osztály változtatható. Ami azt jelenti, hogy a dátum megváltoztatható a tulajdonos osztály tudta nélkül. A Java 8 rendelkezik erre megoldással. A Java 8-ban bevezetett LocalDate, LocalTime, LocalDateTime stb. Változhatatlanok (az eredeti objektum nem változik. Valahányszor változtatás történik, egy új objektum kerül visszaadásra). </para>
+        <para> Unsigned Integer Arithmetic</para>
+        <para> Nem világos, hogy a Java 8 mit próbált elérni az előjel nélküli egész számtani előrehaladással. De általában egy előjel nélküli egész szám károsnak tekinthető a Java-ra. Bonyolultabbá teszi a típusátalakító eszközöket, a típusrendszert és a könyvtár API-kat.</para>
+        <para> Stream API</para>
+        <para> A Stream API használatának legfőbb előnye, hogy egyértelműen növeli a program sebességét és hatékonyságát. Javában erőműnek számít.</para>
+        <para> Párhuzamos rendezés</para>
+        <para> A párhuzamos rendezés több szálat használ a művelethez. Gyorsan és hatékonyan teszi a programot. Ez nem lesz annyira látható egy kis adathalmaz mellett. De ha nagy adatkészletet használunk, a hatékonyság és a teljesítmény növekedése nagyon észrevehető lesz.</para>
+        <para> Új JavaScript motor</para>
+        <para>A Java 8-mal bevezetett JavaScript-motor neve Nashorn volt. </para>
+        <para> </para>
+        
+        
+    </section>        
         
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 </chapter>                
