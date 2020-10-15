@@ -65,7 +65,7 @@ ben tervezzünk osztályokat és generáljunk belőle forrást!</para>
             Megoldás forrása:  
              <mediaobject>
                 <imageobject>
-                    <imagedata fileref="Helló, Mandelbrot!/Forward engineering UML osztálydiagram/BinFaUML.png" scale="70" />
+                    <imagedata fileref="Helló, Mandelbrot!/Forward engineering UML osztálydiagram/BinFaUML.png" scale="45" />
                 </imageobject>   
                 
             </mediaobject> 
@@ -277,6 +277,31 @@ protected:
     </programlisting>
 
     </section>
+    
+     <section>
+        <title></title>
+        <para>
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Mandelbrot!/Neptun%20tant%C3%A1rgyfelv%C3%A9tel%20UML%20diagram%20implement%C3%A1l%C3%A1sa/c%2B%2B"> C++ </link>
+            
+            
+            
+             <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Mandelbrot!/Neptun%20tant%C3%A1rgyfelv%C3%A9tel%20UML%20diagram%20implement%C3%A1l%C3%A1sa/java"> java </link>
+             
+             
+        </para>
+        <para>
+            
+        </para>
+    </section>  
+    
+    
+    
+    
 
 
 
