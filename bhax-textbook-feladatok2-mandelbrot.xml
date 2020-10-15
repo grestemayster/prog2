@@ -72,6 +72,14 @@ ben tervezzünk osztályokat és generáljunk belőle forrást!</para>
     </para>
     <para>A "Tools" menün belül a "Code", majd a "Generate C++" lehetőséget választjuk, hogy legenerálja nekünk a forrást C++ nyelven. Ha javaban szeretnénk megkapni a forrást, akkor a "Generate java" opciót válasszuk.
     </para>
+    <para> <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Mandelbrot!/Neptun%20tant%C3%A1rgyfelv%C3%A9tel%20UML%20diagram%20implement%C3%A1l%C3%A1sa/c%2B%2B"> C++ </link>
+            </para>
+    <para></para>
+    <para></para>
+    <para>
+            </para>
+    
+    
     <programlisting language="c++"><![CDATA[
 
 #include "Csomopont.h"
