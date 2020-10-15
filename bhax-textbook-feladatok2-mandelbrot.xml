@@ -123,6 +123,157 @@ void Csomopont::_(Csomopont const& aUnnamed_1) {
 
 
     </programlisting>
+    <para></para>
+    <para></para>
+    <para></para>
+    <programlisting language="c++"><![CDATA[
+#ifndef CSOMOPONT_H
+#define CSOMOPONT_H
+
+class Csomopont {
+
+private:
+	char betu;
+	Csomopont jobbEgy;
+	Csomopont balNulla;
+
+public:
+	void egyesGyermek();
+
+	void nullasGyermek();
+
+	void getBetu();
+
+	Csomopont(char aB = '/');
+
+	void _Csomopont();
+
+	void ujEgyesGyermek(Csomopont* aGy);
+
+	void ujNullasGyermek(Csomopont* aGy);
+
+private:
+	Csomopont(Csomopont const& aUnnamed_1);
+
+	void _(Csomopont const& aUnnamed_1);
+};
+
+#endif
+
+
+]]>
+
+
+    </programlisting>
+    <para></para>
+    <para></para>
+    <para></para>
+    <programlisting language="c++"><![CDATA[
+#include "LZWBinFa.h"
+
+void LZWBinFa::_LZWBinFa() {
+	// TODO - implement LZWBinFa::_LZWBinFa
+	throw "Not yet implemented";
+}
+
+void LZWBinFa::getMelyseg() {
+	// TODO - implement LZWBinFa::getMelyseg
+	throw "Not yet implemented";
+}
+
+void LZWBinFa::getAtlag() {
+	// TODO - implement LZWBinFa::getAtlag
+	throw "Not yet implemented";
+}
+
+void LZWBinFa::getSzoras() {
+	// TODO - implement LZWBinFa::getSzoras
+	throw "Not yet implemented";
+}
+
+void LZWBinFa::_() {
+	// TODO - implement LZWBinFa::_
+	throw "Not yet implemented";
+}
+
+void LZWBinFa::szabadit() {
+	// TODO - implement LZWBinFa::szabadit
+	throw "Not yet implemented";
+}
+
+void LZWBinFa::rmelyseg() {
+	// TODO - implement LZWBinFa::rmelyseg
+	throw "Not yet implemented";
+}
+
+void LZWBinFa::ratlag() {
+	// TODO - implement LZWBinFa::ratlag
+	throw "Not yet implemented";
+}
+
+void LZWBinFa::rszoras() {
+	// TODO - implement LZWBinFa::rszoras
+	throw "Not yet implemented";
+}
+
+
+]]>
+
+
+    </programlisting>
+    <para></para>
+    <para></para>
+    <para></para>
+    <programlisting language="c++"><![CDATA[
+
+#ifndef LZWBINFA_H
+#define LZWBINFA_H
+
+class LZWBinFa {
+
+protected:
+	Csomopont _gyoker;
+private:
+	int _melyseg;
+	int _atlagosszeg;
+	int _atlagdb;
+	double _szorasosszeg;
+protected:
+	int _maxMelyseg;
+	double _atlag;
+	double _szoras;
+
+public:
+	void _LZWBinFa();
+
+	void getMelyseg();
+
+	void getAtlag();
+
+	void getSzoras();
+
+	LZWBinFa();
+
+	void kiir();
+
+private:
+	void _();
+
+	void szabadit();
+
+protected:
+	void rmelyseg();
+
+	void ratlag();
+
+	void rszoras();
+};
+
+#endif
+]]>
+
+
+    </programlisting>
 
     </section>
 
