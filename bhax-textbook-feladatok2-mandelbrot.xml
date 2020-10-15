@@ -277,10 +277,29 @@ protected:
     </programlisting>
 
     </section>
-    
-     <section>
-        <title></title>
+    <section>
+        <title>Neptun tantárgyfelvétel modellezése UML ben</title>
+        <para>Modellezd le a Neptun rendszer tárgyfelvételéhez szükséges objektumokat UML diagramm segítségével.
+        </para>
         <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: 
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="Helló, Mandelbrot!/Neptun tantárgyfelvétel modellezése UML ben/Neptun.png" scale="70" />
+                </imageobject>   
+                
+            </mediaobject>  
+        </para>
+        <para>
+            
+        </para>
+    </section> 
+     <section>
+        <title>Neptun tantárgyfelvétel UML diagram implementálása</title>
+        <para>Implementáld le az előző feladatban létrehozott diagrammot egy tetszőleges nyelven.
         </para>
         <para>
             Megoldás videó:
@@ -298,6 +317,7 @@ protected:
             
         </para>
     </section>  
+    
     
     
     
