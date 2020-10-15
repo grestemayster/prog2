@@ -62,7 +62,8 @@ ben tervezzünk osztályokat és generáljunk belőle forrást!</para>
             Megoldás videó:
     </para>
     <para>
-            Megoldás forrása:   <mediaobject>
+            Megoldás forrása:  
+             <mediaobject>
                 <imageobject>
                     <imagedata fileref="Helló, Mandelbrot!/Forward engineering UML osztálydiagram/BinFaUML.png" scale="70" />
                 </imageobject>   
