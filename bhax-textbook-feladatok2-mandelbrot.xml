@@ -7,8 +7,12 @@
     </info>
 
     <section>
-        <title>a</title>
-        <para>a
+        <title>Reverse engineering UML osztálydiagram</title>
+        <para>UML osztálydiagram raj
+zolása az első védési C++ programhoz. Az osztálydiagramot a forrásokból
+generáljuk (pl. Argo UML, Umbrello, Eclipse UML) Mutassunk rá a kompozíció és aggregáció
+kapcsolatára a forráskódban és a diagramon, lásd még: https://youtu.be/Td_nlERlEOs
+Lásd fóliák!
         </para>
         <para>
         </para>
@@ -46,6 +50,84 @@
         </para>
         
         
-    </section>        
+    </section>       
+
+    <section>
+    <title>Forward engineering UML osztálydiagram</title>
+    <para>UML
+ben tervezzünk osztályokat és generáljunk belőle forrást!</para>
+    <para></para>
+
+    <para>
+            Megoldás videó:
+    </para>
+    <para>
+            Megoldás forrása:   <mediaobject>
+                <imageobject>
+                    <imagedata fileref="Helló, Mandelbrot!/Forward engineering UML osztálydiagram/BinFaUML.png" scale="70" />
+                </imageobject>   
+                
+            </mediaobject> 
+    </para>
+    <para>A "Tools" menünk belül a "Code", majd a "Generate C++" lehetőséget választjuk, hogy legenerálja nekünk a forrást.
+    </para>
+    <programlisting language="c++">
+
+#include "Csomopont.h"
+
+void Csomopont::egyesGyermek() {
+	// TODO - implement Csomopont::egyesGyermek
+	throw "Not yet implemented";
+}
+
+void Csomopont::nullasGyermek() {
+	// TODO - implement Csomopont::nullasGyermek
+	throw "Not yet implemented";
+}
+
+void Csomopont::getBetu() {
+	// TODO - implement Csomopont::getBetu
+	throw "Not yet implemented";
+}
+
+Csomopont::Csomopont(char aB) {
+	// TODO - implement Csomopont::Csomopont
+	throw "Not yet implemented";
+}
+
+void Csomopont::_Csomopont() {
+	// TODO - implement Csomopont::_Csomopont
+	throw "Not yet implemented";
+}
+
+void Csomopont::ujEgyesGyermek(Csomopont* aGy) {
+	// TODO - implement Csomopont::ujEgyesGyermek
+	throw "Not yet implemented";
+}
+
+void Csomopont::ujNullasGyermek(Csomopont* aGy) {
+	// TODO - implement Csomopont::ujNullasGyermek
+	throw "Not yet implemented";
+}
+
+Csomopont::Csomopont(Csomopont const& aUnnamed_1) {
+	// TODO - implement Csomopont::Csomopont
+	throw "Not yet implemented";
+}
+
+void Csomopont::_(Csomopont const& aUnnamed_1) {
+	// TODO - implement Csomopont::_
+	throw "Not yet implemented";
+}
+
+
+    </programlisting>
+
+    </section>
+
+
+
+
+
 </chapter>
                  
