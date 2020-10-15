@@ -71,7 +71,7 @@ ben tervezzünk osztályokat és generáljunk belőle forrást!</para>
     </para>
     <para>A "Tools" menünk belül a "Code", majd a "Generate C++" lehetőséget választjuk, hogy legenerálja nekünk a forrást.
     </para>
-    <programlisting language="c++">
+    <programlisting language="c++"><![CDATA[
 
 #include "Csomopont.h"
 
@@ -119,6 +119,7 @@ void Csomopont::_(Csomopont const& aUnnamed_1) {
 	// TODO - implement Csomopont::_
 	throw "Not yet implemented";
 }
+]]>
 
 
     </programlisting>
