@@ -1,6 +1,6 @@
 <chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
     <info>
-        <title>Helló, Liskov!</title>
+        <title>Helló, Mandelbrot!</title>
         <keywordset>
             <keyword/>
         </keywordset>
@@ -16,7 +16,7 @@
             Megoldás videó:
         </para>
         <para>
-            Megoldás forrása:    <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Liskov!/Anti%20OO">https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Liskov!/Anti%20OO</link>           
+            Megoldás forrása:  <img width="100" height="100" alt="FPO lady" src="/Helló, Mandelbrot!/Reverse engineering UML osztálydiagram/BinFaUML2.png"/>           
         </para>
         <para>
         </para>
