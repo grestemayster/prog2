@@ -24,13 +24,26 @@
                 <imageobject>
                     <imagedata fileref="Helló, Mandelbrot!/Reverse engineering UML osztálydiagram/BinFaUML2.png" scale="45" />
                 </imageobject>   
-                <textobject>
-                    <phrase>A gép működése</phrase>
-                </textobject>
+                
             </mediaobject>      
         
         </para>
         <para>
+        Az osztálydiagram az osztályok közötti kapcsolatot képviseli a programban.
+        A két osztály két kék színű téglalap. Az téglalap felső része az osztály attribútumait az alsó a metódusait tartalmazza.
+        A láthatóságukat az elötte lévő jelek is megmutatják.
+        
+        <para>+ azaz public</para>
+        <para>- azaz private</para>
+        <para># azaz protected</para>
+
+        <para>A feladat külön kéri, hogy térjünk ki a kompozíció és aggregáció kapcsolatára.</para>
+Aggregációról akkor beszélhetünk, amikor az egyik objektum részben (vagy akár egészben) is tartalmazza
+a másikat. Két típusú van: 
+         <para>erős</para>
+        <para>gyenge</para>
+        A gyenge aggregációt nevezzük kompozíciónak, azaz a tartamazott objektum illetve a tartalmazó objektum függnek egymástól. Egymás nélkül nem funkcionálnak.
+
         </para>
         
         
