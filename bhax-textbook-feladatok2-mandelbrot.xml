@@ -7,21 +7,33 @@
     </info>
 
     <section>
-        <title></title>
-        <para>
-       </para>
+        <title>a</title>
+        <para>a
+        </para>
         <para>
         </para>
         <para>
             Megoldás videó:
         </para>
         <para>
-            Megoldás forrása:  <img width="100" height="100" alt="FPO lady" src="/Helló, Mandelbrot!/Reverse engineering UML osztálydiagram/BinFaUML2.png"/>           
+            Megoldás forrása:   
+            
+            
+            
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="Helló, Mandelbrot!/Reverse engineering UML osztálydiagram/BinFaUML2.png" scale="45" />
+                </imageobject>   
+                <textobject>
+                    <phrase>A gép működése</phrase>
+                </textobject>
+            </mediaobject>      
+        
         </para>
         <para>
         </para>
         
         
     </section>        
-
+</chapter>
                  
