@@ -1,0 +1,27 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Liskov!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+
+    <section>
+        <title></title>
+        <para>
+       </para>
+        <para>
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:    <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Liskov!/Anti%20OO">https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Liskov!/Anti%20OO</link>           
+        </para>
+        <para>
+        </para>
+        
+        
+    </section>        
+
+                 
