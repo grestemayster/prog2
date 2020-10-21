@@ -22,7 +22,7 @@ tanitok javat/adatok.html</para>
         </para>
 
         <para>
-            Megoldás forrása:         
+            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Chomsky!/Encoding"> https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Chomsky!/Encoding </link>        
         </para>
 
         <para>
@@ -52,7 +52,7 @@ k i és magyarázd meg a használt struktúratömb memóriafoglalását!)</para>
         </para>
 
         <para>
-            Megoldás forrása:         
+            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Chomsky!/l334d1c4"> https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Chomsky!/l334d1c4 </link>        
         </para>
         <para>A leetspeak a kommunikáció során a karaktereket(betűket, számokat) hozzájuk hasonlóra cseréli.A 80as években alakult ki.</para>
         <para>"Maga a leet szó leetspeakben írva így fest: 1337. A szó egyébként az angol elite szóalak elvonásával jött létre követve az élőszó hangzását."
@@ -76,9 +76,11 @@ Végezetül a "LeetChyper" objektumot hozom létre. </para>
     </section> 
     
     <section>
-        <title></title>
+        <title>Perceptron osztály</title>
 
-        <para></para>
+        <para>Dolgozzuk be egy külön projektbe a projekt Perceptron osztályát!
+Lásd
+https://youtu.be/XpBnR31BRJY</para>
 
         <para>
         </para>
@@ -88,20 +90,52 @@ Végezetül a "LeetChyper" objektumot hozom létre. </para>
         </para>
 
         <para>
-            Megoldás forrása:         
+            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Chomsky!/Perceptron"> https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Chomsky!/Perceptron </link>        
         </para>
         
         <para>
+        Érdemes lenne először a fogalmat megmagyarázni. A perceptron nem más mint ezen neuron mesterséges
+intelligenciában használt változata. Tanulásra képes, a bemenő 0-k és 1-esek sorozatából mintákat tanul
+meg és súlyozott összegzést végez.
+A következő feladat során egy ilyen perceptront fogunk elkészíteni, aminek esetünkben a feladata az lesz,
+hogy a mandelbrot.cpp programunk által létrehozott Mandelbrot-halmazt ábrázoló PNG kép egyik
+színkódját vegye és az a színkód legyen a többrétegű neurális háló inputja. Lássuk a programot!
         </para>
+        <para>Include-oljuk az iostream, az mlp és a png++/png könyvtárakat. Utóbbi kettőt azért, mert többrétegű
+perceptront akarunk majd létrehozni (Multi Layer Perceptron), így muszáj ezt a könyvtárat include-olnunk
+a programunkba. Utolsó könyvtárunk ahogy a neve is sugallja, a PNG képállományokkal való munkát teszi
+lehetővé. Előzőleg telepíteni szükséges, ha nem megtalálható a gépünkön.
+        </para>
+        <para>Kezdődik a main függvényünk. Első sorában megmondjuk, hogy az 1-es parancssori argumentum alapján
+kerül beolvasásra a képállomány. Ettől kezdve dolgozni tudunk A kép méretét a get_width és a
+get_height szorzatából kapjuk, ezt el is tároljuk egy változóban. A következő sorban létrehozásra
+példányosítunk egy perceptront a new operátor segítségével, amely paraméterei balról jobbra haladva: a
+rétegek száma, 1. réteg neuronjai az inputrétegben, 2. réteg neuronjai az inputrétegben, az eredmény (jelen
+esetben 1 szám)</para>
+        <para>Létrehozásra kerül egy double típusú mutató. Jönnek a for ciklusok. Az egyik for ciklus végigmegy
+a kép szélességét alkotó pontokon, a másik pedig a magasságán. Miután végigmentünk a képpontokon,
+az image tárolni fogja a képállomány vörös színkomponensét. Tehát a beolvasásra került képállomány
+Univerzális programozás 231 / 303
+piros vörös komponensét a lefoglalt tárba másoljuk bele. A value értéke a Perceptron image-re történő
+meghívása adja majd. Így a perceptronban tárolásra kerül a vörös színkomponens. A value változó
+egy double típusú értéket tárol. Ez kiiratásra kerül és töröljük tovább nem használatos elemeket, hiszen a
+számukra eddig fenntartott memóriaterületet érdemes felszabadítanunk, így a lefoglalt memóriamennyiség
+újra használható. Programunk ezzel véget is ért.
+Fordítjuk és futtatjuk a képen látható módon:</para>
+<para>g++ mlp.hpp main.cpp -o perc -lpng -std=c++11</mlp></para>
+<para>./perc elso.png</para>
+
+
     </section>
     
        <section>
         <title></title>
 
         <para></para>
+<para></para>
+<para></para>
 
-        <para>
-        </para>
+        
 
         <para>
             Megoldás videó:
