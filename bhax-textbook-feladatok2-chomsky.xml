@@ -122,7 +122,7 @@ egy double típusú értéket tárol. Ez kiiratásra kerül és töröljük tov�
 számukra eddig fenntartott memóriaterületet érdemes felszabadítanunk, így a lefoglalt memóriamennyiség
 újra használható. Programunk ezzel véget is ért.
 Fordítjuk és futtatjuk a képen látható módon:</para>
-<para>g++ mlp.hpp main.cpp -o perc -lpng -std=c++11</mlp></para>
+<para>g++ mlp.hpp main.cpp -o perc -lpng -std=c++11</para>
 <para>./perc elso.png</para>
 
 
@@ -144,7 +144,7 @@ https://www.ta nkonyvtar.hu/en/tartalom/tkt/javat tanitok javat/ch03.html#labiri
         </para>
 
         <para>
-            Megoldás forrása:         
+            Megoldás forrása:  <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Chomsky!/Full%20screen"> hhttps://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Chomsky!/Full%20screen </link>        
         </para>
         
         <para>Importáljuk a grafikus ablakban való megjelenítéshez és annak beállításához szükséges osztályokat.

@@ -32,8 +32,8 @@ Lásd fóliák!
               
         
         </para>
-        <para>Az osztálydiagram az osztályok közötti kapcsolatot képviseli a programban.
-        	A két osztály két kék színű téglalap. Az téglalap felső része az osztály attribútumait az alsó a metódusait tartalmazza.
+        <para>Az osztálydiagram az osztályok közötti kapcsolatot képviseli a programban.</para>
+        	<para>A két osztály két kék színű téglalap.</para><para> Az téglalap felső része az osztály attribútumait az alsó a metódusait tartalmazza.
         	A láthatóságukat az elötte lévő jelek is megmutatják.</para>
         
         <para>+ azaz public</para>
@@ -62,8 +62,8 @@ ben tervezzünk osztályokat és generáljunk belőle forrást!</para>
             Megoldás videó:
     </para>
     <para>
-            Megoldás forrása:  
-             <mediaobject>
+            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Mandelbrot!/Forward%20engineering%20UML%20oszt%C3%A1lydiagram/c%2B%2B"> C++ </link> </para>
+             <para><mediaobject>
                 <imageobject>
                     <imagedata fileref="Helló, Mandelbrot!/Forward engineering UML osztálydiagram/BinFaUML.png" scale="45" />
                 </imageobject>   
@@ -72,7 +72,7 @@ ben tervezzünk osztályokat és generáljunk belőle forrást!</para>
     </para>
     <para>A "Tools" menün belül a "Code", majd a "Generate C++" lehetőséget választjuk, hogy legenerálja nekünk a forrást C++ nyelven. Ha javaban szeretnénk megkapni a forrást, akkor a "Generate java" opciót válasszuk.
     </para>
-    <para> <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Mandelbrot!/Neptun%20tant%C3%A1rgyfelv%C3%A9tel%20UML%20diagram%20implement%C3%A1l%C3%A1sa/c%2B%2B"> C++ </link>
+    <para> 
             </para>
     <para></para>
     <para></para>
