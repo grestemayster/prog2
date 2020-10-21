@@ -9,7 +9,7 @@ public class fullscreen extends JPanel{
 	public void paint(Graphics g)
 	{
     	g.setFont(new Font("TimesRoman", Font.BOLD, 56));
-    	g.setColor(Color.gold);
+    	g.setColor(Color.cyan);
 		g.drawString(uzenet, 540, 540);
 
 	}
