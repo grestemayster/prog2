@@ -129,9 +129,11 @@ Fordítjuk és futtatjuk a képen látható módon:</para>
     </section>
     
        <section>
-        <title></title>
+        <title>Full screen</title>
 
-        <para></para>
+        <para>Készítsünk egy teljes képernyős Java programot!
+Tipp:
+https://www.ta nkonyvtar.hu/en/tartalom/tkt/javat tanitok javat/ch03.html#labirintus_jatek</para>
 <para></para>
 <para></para>
 
@@ -145,8 +147,32 @@ Fordítjuk és futtatjuk a képen látható módon:</para>
             Megoldás forrása:         
         </para>
         
-        <para>
+        <para>Importáljuk a grafikus ablakban való megjelenítéshez és annak beállításához szükséges osztályokat.
         </para>
+
+
+<para>        Létrehozásra kerül a fullscreen osztály ami az előbb importált JPanel osztály leszármazottja lesz.
+Egy stringben megadom a kiiratásra szánt szöveget majd a paint metódusban attribútumként megadott
+objektumpéldány megjelenítését módosítom a függvénytörzsben.
+A setFont a szöveg karaktereinek megjelenését hivatott beállítani. A paraméterek a következők: betűtípus,
+típus(esetünkben félkövér) és betűméret. A setColor értelemszerűen a kiiratandó szöveg színét
+változtatja meg. A drawString függvénnyel pedig egy adott stringet adott koordinátákon jeleníthetünk
+meg.
+</para>
+<para>A main fgv-en belül példányosítok egy JFrame példányt, aminek paramétere az a
+string lesz, mely a program ablakának "neve" lesz. Hozzáadom a frame-hez a fullscreen osztály
+egy példányát majd beállításra kerül a frame mérete pixelben a setSize függvénnyel, a láthatósága
+a setVisible függvénnyel, a viselkedés amit tanusít, amikor bezárjuk az adott ablakot a
+setDefaultCloseOperation-nal - ami ebben az esetben nem jelent mást, mint a programból való kilépést ,
+illetve az ablak átmérezhetőségét a setResizable függvénnyel.
+</para>
+
+<para>Fordítás, futtatás:</para>
+<para>javac fullscreen.java</para>
+<para>java fullscreen</para>
+
+
+
     </section>
     
         
