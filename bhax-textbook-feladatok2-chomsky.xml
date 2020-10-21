@@ -1,0 +1,120 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Chomsky!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+
+    <section>
+        <title>Encoding</title>
+
+        <para>Fordítsuk le és futtassuk a Javat tanítok könyv MandelbrotHalmazNagyító.java forrását úgy, hogy a
+fájl nevekben és a forrásokban is meghagyjuk az ékezetes bet űket!
+https://www.tankonyvtar.hu/hu/tartalom/tkt/javat
+tanitok javat/adatok.html</para>
+
+        <para>
+        </para>
+
+        <para>
+            Megoldás videó:
+        </para>
+
+        <para>
+            Megoldás forrása:         
+        </para>
+
+        <para>
+        A futtassuk során egy olyan hibaüzenet jelent meg. Olyan karakterek szerepelnek a kódban, amiket nem tud értelmezni a fordító, mivel nem UTF-8as kódolás.
+        </para>
+        <para>8859_2 ISO Latin-2 -es kódolással orvosolhatjuk is a próblémát.Így a fordításuk a következő:
+        </para>
+        <para>javac -encoding ISO8859_2 MandelbrotHalmazNagyító.java
+        </para>
+        <para>javac -encoding ISO8859_2 MandelbrotIterációk.java
+        </para>
+        
+    </section>        
+
+    <section>
+        <title>l334d1c4</title>
+
+        <para>Írj olyan OO Java vagy C++ osztályt, amely leet cipherként működik, azaz megvalósítja ezt a betű
+helyettesítést: https://simple.wikipedia.org/wiki/Leet (Ha ez első részben nem tetted meg, akkor írasd
+k i és magyarázd meg a használt struktúratömb memóriafoglalását!)</para>
+
+        <para>
+        </para>
+
+        <para>
+            Megoldás videó:
+        </para>
+
+        <para>
+            Megoldás forrása:         
+        </para>
+        <para>A leetspeak a kommunikáció során a karaktereket(betűket, számokat) hozzájuk hasonlóra cseréli.A 80as években alakult ki.</para>
+        <para>"Maga a leet szó leetspeakben írva így fest: 1337. A szó egyébként az angol elite szóalak elvonásával jött létre követve az élőszó hangzását."
+        </para>
+        <para>Először minden Java könyvtárat importálok. Majd a "LeetChyper" osztályban létrehozok egy stringet az általunk megadott szövegnek amellyet átalakítani szeretnénk, illetve egy másik stringet a kész, azaz átalakított szövegnek.
+        Az eredményt print-el írom ki.
+        A következő lépés az "atalakit" fgv volt, amelybe feltöltöttem a "character" nevű MAP-et a megfelelő párokkal. Utána egy for ciklus következik. A for ciklussal végigmegyek az általunk megadott szó betűin
+        ahol a leetspeak-es megfelelőjét szóközökkel elválasztva tárolom egy változóban.  
+        Utána létrehoztam a konstruktort is, ahol meghívtam a leet átalakításhoz szükséges metódust.
+        Itt kapott helyet a kiírás is. 
+        A main-en belül egy Stringbuildert hozok létre, amivel a már átalakított stringet építem fel egy for ciklussal, ami végigmegy a parancssori
+argumentumként megadott szón.
+Végezetül a "LeetChyper" objektumot hozom létre. </para>
+
+        <para></para>
+
+        <para></para>
+
+        <para></para>
+
+    </section> 
+    
+    <section>
+        <title></title>
+
+        <para></para>
+
+        <para>
+        </para>
+
+        <para>
+            Megoldás videó:
+        </para>
+
+        <para>
+            Megoldás forrása:         
+        </para>
+        
+        <para>
+        </para>
+    </section>
+    
+       <section>
+        <title></title>
+
+        <para></para>
+
+        <para>
+        </para>
+
+        <para>
+            Megoldás videó:
+        </para>
+
+        <para>
+            Megoldás forrása:         
+        </para>
+        
+        <para>
+        </para>
+    </section>
+    
+        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</chapter>                
