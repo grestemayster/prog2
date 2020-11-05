@@ -17,7 +17,7 @@ osztályát (miután kicsomago ltuk az src.zip állományt, arra ráengedve)!
             Megoldás videó:
         </para>
         <para>
-            Megoldás forrása:  <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Arroway!/oo ">https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Arroway!/oo</link>               
+            Megoldás forrása:  <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Stroustrup!/JDK%20oszt%C3%A1lyok ">https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Stroustrup!/JDK%20oszt%C3%A1lyok</link>               
         </para>
         <para>A feladat megkezdését természetesen a leírás által is tanácsolt fénykard program megkeresésével kezdtem. Bátfai Tanár Úr FUTURE projektjének programkódjai között sikerült is rátalálnom: <link xlink:href="https://github.com/nbatfai/future/blob/master/cs/F7/fenykard.cpp">https://github.com/nbatfai/future/blob/master/cs/F7/fenykard.cpp</link></para>
 
@@ -129,7 +129,7 @@ készített titkos szövegen.</para>
             Megoldás videó:
         </para>
         <para>
-            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Arroway!/Gagyi">   https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Arroway!/Gagyi </link>             
+            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Stroustrup!/Hib%C3%A1san%20implement%C3%A1lt%20RSA%20t%C3%B6r%C3%A9se">   https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Stroustrup!/Hib%C3%A1san%20implement%C3%A1lt%20RSA%20t%C3%B6r%C3%A9se</link>             
         </para>
         <para>
           Bevezető forrásai: <link xlink:href="https://hu.wikipedia.org/wiki/RSA-elj%C3%A1r%C3%A1s">https://hu.wikipedia.org/wiki/RSA-eljárás</link>, <link xlink:href="https://www.tankonyvtar.hu/hu/tartalom/tamop425/0046_informatikai_biztonsag_es_kriptografia/ch08s07.html"> https://www.tankonyvtar.hu/hu/tartalom/tamop425/0046_informatikai_biztonsag_es_kriptografia/ch08s07.html</link>
@@ -301,7 +301,7 @@ hét/Perceptron osztály feladatot is.)
             Megoldás videó:
         </para>
         <para>
-            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Arroway!/Gagyi">   https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Arroway!/Gagyi </link> 
+            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Stroustrup!/V%C3%A1ltoz%C3%B3%20argumentumsz%C3%A1m%C3%BA%20ctor">   https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Stroustrup!/V%C3%A1ltoz%C3%B3%20argumentumsz%C3%A1m%C3%BA%20ctor</link> 
         </para>
          <para>
             Tanulságok, tapasztalatok, magyarázat...
@@ -330,7 +330,7 @@ hét/Perceptron osztály feladatot is.)
           ]]></programlisting>
 
           <para>
-            Változó argumentumszámú konstruktorról akkor beszélhetünk, mikor nincsen egyértelműen definiálva, egy konstruktornak hány paraméterrel kell rendelkeznie. A mi programunk mlp.hpp header-fájljában is ezzel találkozhatunk. Ebből annyit olvashatunk le, hogy egy argumentumot fixen tartalmaznia kell (ez esetünkben az Integer típusú <function>nof</function> lesz), a változó argumentumszámot pedig a "..." karaktersorozat jelzi számunkra.
+            Változó argumentumszámú konstruktorról akkor beszélhetünk, mikor nincsen egyértelműen definiálva, egy konstruktornak hány paraméterrel kell rendelkeznie. A mi programunk mlp.hpp header-fájljában is ezzel találkozhatunk. Ebből annyit olvashatunk le, hogy egy argumentumot fixen tartalmaznia kell (ez esetünkben az Integer típusú  "nof " lesz), a változó argumentumszámot pedig a "..." karaktersorozat jelzi számunkra.
           </para>
 
           <para>
@@ -354,7 +354,7 @@ Az így kapott kimeneti jelet összevetjük a tényleges kimeneti jellel;
 A hibát visszaáramoltatjuk a hálózaton, súlyokat pedig megváltoztatjuk a hiba csökkentése érdekében.
         </para>
   
-        <para>A következő feladat során egy ilyen perceptront fogunk elkészíteni, aminek alapvetően a feladata az, hogy a <function>mandelbrot.cpp</function> programunk által létrehozott Mandelbrot-halmazt ábrázoló (elsomandel.png) PNG képet felhasználva generáltassunk egy vele megegyező méretű képet. Lássuk a programot!</para>
+        <para>A következő feladat során egy ilyen perceptront fogunk elkészíteni, aminek alapvetően a feladata az, hogy a  "mandelbrot.cpp " programunk által létrehozott Mandelbrot-halmazt ábrázoló (elsomandel.png) PNG képet felhasználva generáltassunk egy vele megegyező méretű képet. Lássuk a programot!</para>
         <para>
           Kezdjük a feladat értelmezésével. A feladat szinte ugyanazt kéri, mint az előző Perceptronos feladatainkál egy kis csavarral. Ugyanis az eddigi példáink során a Perceptronunk egy képállományra egy értéket adott vissza.
         </para>
@@ -366,7 +366,7 @@ A hibát visszaáramoltatjuk a hálózaton, súlyokat pedig megváltoztatjuk a h
           #include <png++/png.hpp>
     ]]></programlisting>
 
-        <para>Include-oljuk az iostream, az <function>mlp</function> és a <function>png++/png</function> könyvtárakat. Utóbbi kettőt azért, mert többrétegű perceptront akarunk majd létrehozni (Multi Layer Perceptron), így muszáj ezt a könyvtárat include-olnunk a programunkba. Utolsó könyvtárunk ahogy a neve is sugallja, a PNG képállományokkal való munkát teszi lehetővé. Előzőleg telepíteni szükséges, ha nem megtalálható a gépünkön.</para>
+        <para>Include-oljuk az iostream, az  "mlp " és a  "png++/png " könyvtárakat. Utóbbi kettőt azért, mert többrétegű perceptront akarunk majd létrehozni (Multi Layer Perceptron), így muszáj ezt a könyvtárat include-olnunk a programunkba. Utolsó könyvtárunk ahogy a neve is sugallja, a PNG képállományokkal való munkát teszi lehetővé. Előzőleg telepíteni szükséges, ha nem megtalálható a gépünkön.</para>
 
         <programlisting language="C++"><![CDATA[   
           using namespace std;
@@ -380,7 +380,7 @@ A hibát visszaáramoltatjuk a hálózaton, súlyokat pedig megváltoztatjuk a h
             Perceptron *p = new Perceptron(3, size, 256, size);
     ]]></programlisting>
 
-      <para>Kezdődik a main függvényünk. Első sorában megmondjuk, hogy az 1-es parancssori argumentum alapján kerül beolvasásra a képállomány. Ettől kezdve dolgozni tudunk A kép méretét a <function>get_width</function> és a <function>get_height</function> szorzatából kapjuk, ezt el is tároljuk egy változóban. A következő sorban létrehozásra példányosítunk egy perceptront a <varname>new</varname> operátor segítségével, amely paraméterei balról jobbra haladva: a rétegek száma, 1. réteg neuronjai az inputrétegben, 2. réteg neuronjai az inputrétegben, az eredmény (jelen esetben egy, a már megszokott szám helyett egy képállomány)</para>
+      <para>Kezdődik a main függvényünk. Első sorában megmondjuk, hogy az 1-es parancssori argumentum alapján kerül beolvasásra a képállomány. Ettől kezdve dolgozni tudunk A kép méretét a  "get_width " és a  "get_height " szorzatából kapjuk, ezt el is tároljuk egy változóban. A következő sorban létrehozásra példányosítunk egy perceptront a <varname>new</varname> operátor segítségével, amely paraméterei balról jobbra haladva: a rétegek száma, 1. réteg neuronjai az inputrétegben, 2. réteg neuronjai az inputrétegben, az eredmény (jelen esetben egy, a már megszokott szám helyett egy képállomány)</para>
       <programlisting language="C++"><![CDATA[
       double* image = new double[size];
 
@@ -406,13 +406,13 @@ A hibát visszaáramoltatjuk a hálózaton, súlyokat pedig megváltoztatjuk a h
       delete [] image;
       ]]></programlisting>
 
-      <para>Itt válik érdekessé a dolog, hiszen már nem "csak" egy értéket akarunk kiiratni, hanem egy képet generáltatni, ahhoz azonban az egy double csillag típusra van már szükségünk. Ezt követően két for ciklussal végigmegyünk az eredeti kép szélességén és magasságán és az új képünk megkapja a színadatokat. Ezt követően a <function>write</function> függvénnyel létrehozásra kerül az új képállományunk kimeneti néven, png formátumban.</para>
+      <para>Itt válik érdekessé a dolog, hiszen már nem "csak" egy értéket akarunk kiiratni, hanem egy képet generáltatni, ahhoz azonban az egy double csillag típusra van már szükségünk. Ezt követően két for ciklussal végigmegyünk az eredeti kép szélességén és magasságán és az új képünk megkapja a színadatokat. Ezt követően a  "write " függvénnyel létrehozásra kerül az új képállományunk kimeneti néven, png formátumban.</para>
 
       <para>
       	A végén törlésre kerülnek az eddig, de tovább már nem használatos elemeket, hiszen a számukra eddig fenntartott memóriaterületet érdemes felszabadítanunk, így a lefoglalt memóriamennyiség újra használható. Programunk ezzel véget is ért.
       </para>
 
-      <para>Természetesen ahhoz, hogy megfelelően működjön a programunk, többek között bele kellett nyúlni egy kicsit az <function>mlp.hpp</function> fájlba is.</para>
+      <para>Természetesen ahhoz, hogy megfelelően működjön a programunk, többek között bele kellett nyúlni egy kicsit az  "mlp.hpp " fájlba is.</para>
 
       <programlisting language="C"><![CDATA[
       double* operator() ( double image [] )
