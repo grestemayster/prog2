@@ -1,0 +1,431 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Stroustrup!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+
+    <section>
+        <title>JDK osztályok</title>
+        <para>Írjunk olyan Boost C++ programot (indulj ki például a fénykardból) amely kilistázza a JDK összes
+osztályát (miután kicsomago ltuk az src.zip állományt, arra ráengedve)!
+        </para>
+        <para>
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:  <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Arroway!/oo ">https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Arroway!/oo</link>               
+        </para>
+        <para>A feladat megkezdését természetesen a leírás által is tanácsolt fénykard program megkeresésével kezdtem. Bátfai Tanár Úr FUTURE projektjének programkódjai között sikerült is rátalálnom: <link xlink:href="https://github.com/nbatfai/future/blob/master/cs/F7/fenykard.cpp">https://github.com/nbatfai/future/blob/master/cs/F7/fenykard.cpp</link></para>
+
+        <para>
+          Ami nekünk ebből a kódból érdekes lesz, az a következő, "read_acts" függvény:
+        </para>
+
+        <programlisting language="C++"><![CDATA[
+        void read_acts(boost::filesystem::path path, std::map <std::string, int> &acts)
+        {
+
+            if (is_regular_file(path)) {
+
+                std::string ext(".props");
+                if (!ext.compare(boost::filesystem::extension(path))) {
+
+                    std::string actpropspath = path.string();
+                    std::size_t end = actpropspath.find_last_of("/");
+                    std::string act = actpropspath.substr(0, end);
+
+                    acts[act] = get_points(path);
+
+                    std::cout << std::setw(4) << acts[act] << "    " << act << std::endl;
+                }
+
+
+            } else if (is_directory(path))
+                for (boost::filesystem::directory_entry & entry : boost::filesystem::directory_iterator(path))
+                    read_acts(entry.path(), acts);
+
+        }   
+        ]]></programlisting>
+
+        <para>Mit csinál ez a függvény? Végigmegy egy állományszerkezeten és egy adott kiterjesztésű ( esetben .props) fájlokat keres, majd a bennük található információkat kiolvassa és eltárolja. </para>
+        <para>Ha jobban belegondolunk, lényegében most is valami hasonlót kell csinálnunk. Hiszen egy állományszerkezetet kell bejárnunk és szintén egy adott kiterjesztésű (.java) fájlokat keresünk.</para>
+        <para>Lássuk, a fénykardos példából kiindulva hogyan is sikerülne ezt megvalósítani!</para>
+
+        <programlisting language="C++"><![CDATA[
+        #include <iostream>
+        #include <string>
+        #include <fstream>
+        #include <iomanip>
+        #include <vector>
+
+        #include <boost/filesystem.hpp>
+
+        using namespace std;
+
+        int counter=0;
+        ]]></programlisting>
+
+        <para>
+          Inkludáljuk a megfelelő osztályokat és deklarálunk egy változót az osztályok számának tárolására.
+        </para>
+
+        <programlisting language="C++"><![CDATA[
+        void read_classes (boost::filesystem::path path, vector<string> acts)
+        {
+            if(is_regular_file(path))
+            {
+            string ext(".java");
+            if(!ext.compare(boost::filesystem::extension (path))) 
+            {
+                cout<<path.string()<<'\n';
+                string actjavaspath=path.string();
+                size_t end = actjavaspath.find_last_of("/");
+                string act = actjavaspath.substr(0,end);
+                acts.push_back(act);
+                counter++;
+            }
+        }
+          else if(is_directory(path))
+          for(boost::filesystem::directory_entry & entry :
+              boost::filesystem::directory_iterator (path))
+          read_classes(entry.path(),acts);
+        }
+        ]]></programlisting>
+
+        <para>Az eljárás (aminek egyébként két paramétere van: az elérési hely - vagyis ahol keresnie kell - illetve a keresett elemeket tároló vector) a következőképpen működik: </para>
+        <para>
+         Alapvetően egy feltételvizsgálat következik, aminek két ága van. Az if-fel bevezetett feltételvizsgálatban, azon belül pedig az "is_regular_file()" függvénnyel megvizsgáljuk, hogy a fájlhieararchiában jelenleg "hol állunk"..Tehát hogy ha ún. "regular fájlok" vagyis hagyomános fájlok, nem könyvtárak állnak rendelkezésre vizsgálatra, akkor megvizsgáljuk, mely fájlok kiterjesztése .java. Ezeket az állományokat a vectorba gyűjtjük és növeljük a számlálót. Eltároljuk a keresett fájlok elérési útvonalát is két segédváltozó "end" és "actjavaspath" segítségével.
+        </para>
+        <para>
+          Ha nem fájlokkal vagyunk körülvéve ott, ahol jelenleg állunk, meghívásra kerül a "is_directory" függvény, tehát ez az a helyzet, mikor még a könyvtárak szintjén állunk a "kutakodásban".. Ekkor egy for ciklus indul és rekurzívan meghívjuk a "read_classes" függvényt. Így előbb-utóbb eljutunk a fájlok szintjére. (Már ha nem vagyunk ott jelenleg..)
+        </para>
+
+        <programlisting language="C++"><![CDATA[
+        int main( int argc, char *argv[])
+        {
+            vector<string> acts;
+            read_classes("src", acts);
+            cout << "Ennyi Java osztalyt talaltunk: "<< counter << "\n";
+        }
+        ]]></programlisting>
+
+        <para>
+          A "main" függvényben járunk már. Létrehozásra kerül az osztályokat tároló vectorunk, meghívásra kerül a "read_classes" függvény és kiiratjuk, hány osztály is volt megtalálható az src mappában.
+        </para>
+
+    </section>        
+
+    <section>
+        <title>Hibásan implementált R
+SA törése</title>
+        <para>Készítsünk betű gyakoriság alapú törést egy hibásan implementált RSA kódoló:
+https://arato.inf.unideb.hu/batfai.norbert/UDPROG/deprecated/Prog2_3.pdf (71 73 fólia) által
+készített titkos szövegen.</para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Arroway!/Gagyi">   https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Arroway!/Gagyi </link>             
+        </para>
+        <para>
+          Bevezető forrásai: <link xlink:href="https://hu.wikipedia.org/wiki/RSA-elj%C3%A1r%C3%A1s">https://hu.wikipedia.org/wiki/RSA-eljárás</link>, <link xlink:href="https://www.tankonyvtar.hu/hu/tartalom/tamop425/0046_informatikai_biztonsag_es_kriptografia/ch08s07.html"> https://www.tankonyvtar.hu/hu/tartalom/tamop425/0046_informatikai_biztonsag_es_kriptografia/ch08s07.html</link>
+          
+        </para>
+
+        
+          <para>
+            Először pár szóban az RSA-ról: napjaink egyik legszélesebb körben használt titkosító eljárása. Az eljárás neve lényegében egy mozaikszó, az algoritmus alkotói: Ron Rivest, Adi Shamir és Len Adleman kezdőbetűiból áll össze, 1978-ban publikálták. Működése matematikai alapokon, pontosabban a Fermat-tételen nyugszik. Érdekes jellemzője az algoritmusnak, hogy két kulccsal, egy nyílttal vagy nyilvánossal és egy titkos kulcssal dolgozik. Mindkét kulcs egy-egy számpár. Ez azért érdekes, mert ezzel teljesen ketté lesz választva a titkosítás és a törés folyamata. Mivel a kódolás és a dekódolás paraméterei nem lesznek ugyanazok, így az egyik meghatározása a másikból sem lesz megoldható.
+</para>
+<para>Az RSA titkosításról minden további tudnivaló <link xlink:href="https://hu.wikipedia.org/wiki/RSA-elj%C3%A1r%C3%A1s"> itt</link>  </para>
+
+<para>
+Fontos említést tennünk a BigInteger osztályról is, amit a feladat során természetesen használni is fogunk. A BigInteger osztály már egész régóta a JDK részét képezi, jelenleg a java.math csomagban találhatjuk meg. Gyakran használják kriptográfiai kódolók-törők elkészítéséhez, sokak számára használatuk összeolvadt ezzel a fajta felhasználással.
+A típust egy egész értékből és 32-bites egészből úgynevezett skálázó faktor alkotja.
+</para>
+
+        <para>
+            
+        </para>
+        <para>Lássuk a programunkat!</para>
+
+<programlisting language="Java"><![CDATA[
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.util.HashMap;
+import java.util.Map.Entry;
+]]>
+</programlisting>
+<para>Először is importálunk minden olyan könyvtárat, melyekre a feladat megoldása során szükségünk lesz. Itt található a bevezetőben már említett  "BigInteger " osztály is.</para>
+
+<programlisting language="Java"><![CDATA[
+  public class rsa_cipher {
+  public static void main(String[] args) {
+    int bitlength = 2100;
+    
+    SecureRandom random = new SecureRandom();
+    
+    BigInteger p = BigInteger.probablePrime(bitlength/2, random);
+    BigInteger q = BigInteger.probablePrime(bitlength/2, random);
+    
+    BigInteger publicKey = new BigInteger("65537");
+    BigInteger modulus = p.multiply(q);
+    
+    String str = "this is a perfect string".toUpperCase();
+    System.out.println("Eredeti: " + str);
+]]>
+</programlisting>
+    <para>
+      Haladjunk logikai sorrendben. A  "main "ünket tartalmazó,  "rsa_cipher " osztályban járunk. Itt történik a bithossz beállítása, itt kerülnek létrehozásra a  "BigInteger " számaink. Ilyen érték lesz többek között a nyilvános kulcsunk és a modulus is. Megadjuk eredeti, átalakításra váró szövegünket, amit a  "str " nevű, String típusú változóban el is tárolunk.
+    </para>
+
+    <programlisting language="Java"><![CDATA[
+    byte[] out = new byte[str.length()];
+    for (int i = 0; i < str.length(); i++) {
+      char c = str.charAt(i);
+      if (c == ' ')
+        out[i] = (byte)c;
+      else
+        out[i] = new BigInteger(new byte[] {(byte)c}).modPow(publicKey, modulus).byteValue();
+    }
+    String encoded = new String(out);
+    System.out.println("Kodolt:" + encoded);
+    
+    Decode de = new Decode(encoded);
+    System.out.println("Visszafejtett: " + de.getDecoded());
+  }
+}
+]]>
+</programlisting>
+    <para>
+      A  "main "ből kiemelt pár sor végzi a titkosítást, méghozzá a stringünk minden egyes karakterén végighaladva, egyenként teszi meg azt. Egy byte elemeket tartalmazó tömbben kerülnek tárolásra a titkosított karakterek, melyekből stringet készítünk, neve  "encoded " lesz melyet ki is iratunk. A következő sorban létrehozunk egy új  "Decode " objektumot, ami a már gyakoriság alapon visszafejtett stringünket tartalmazza. Kérdés az, hogyan is működik ez a fajta visszafejtés. Vessünk egy pillantást a következő függvény(ek)re!
+    </para>
+
+    <programlisting language="Java"><![CDATA[
+    private void loadFreqList() {
+    BufferedReader reader;
+    try {
+      reader = new BufferedReader(new FileReader("gyakorisag.txt"));
+      String line;
+      while((line = reader.readLine()) != null) {
+        String[] args = line.split("\t");
+        char c = args[0].charAt(0);
+        int num = Integer.parseInt(args[1]);
+        this.charRank.put(c, num);
+      }
+    } catch (Exception e) {
+      System.out.println("Error when loading list -> " + e.getMessage());
+    }   
+  }
+    ]]>
+</programlisting>
+
+<para>
+  A függvényen belül egy try-catch szerkezetben történik a lényeg. Ugyanis
+   beolvasásra kerül egy gyakoriság lista. Karakterenként végigmegy a lista elemein és abban az esetben, ha az aktuális betű már megtalálható benne, a gyakorisága növelésre kerül. Ha új betűvel találkozik, gyakorisága 1-re állítódik be. Mindez a try-on belül volt megtalálható. Catch-csel hibaüzenetet dobunk ha nem sikerült a listát betöltenünk.
+</para>
+
+<programlisting language="Java"><![CDATA[
+  private char nextFreq() {
+    char c = 0;
+    int nowFreq = 0;
+    for(Entry<Character, Integer> e : this.charRank.entrySet()) {
+      if (e.getValue() > nowFreq) {
+        nowFreq = e.getValue();
+        c = e.getKey();
+      }
+    }
+    if (this.charRank.containsKey(c))
+      this.charRank.remove(c);
+    return c;
+  }
+    ]]>
+</programlisting>
+
+<para>
+  Lássuk, mit tesz a  "nextFreq " függvényünk. Lényegében rendezéssel, pontosabban maximum-kiválasztásossal a gyakorisági listában lévő betűk behelyettesítése történik. Látható, hogy alapvetően a gyakorisági listánk az, ami befolyásolja majd a kapott eredményünket, hiszen a nagyobb gyakorisági értékkel rendelkező karaktereket helyezi előtérbe majd az algoritmus.
+</para>
+
+<programlisting language="Java"><![CDATA[
+    public Decode(String str) {
+    this.charRank = new HashMap<Character, Integer>();
+    this.decoded = str;
+    
+    this.loadFreqList();
+    
+    HashMap<Character, Integer> frequency = new HashMap<Character, Integer>();
+    for (int i = 0; i < str.length(); i++) {
+      char c = str.charAt(i);
+      if (c != ' ')
+        if(frequency.containsKey(c))
+          frequency.put(c, frequency.get(c) + 1);
+        else
+          frequency.put(c, 1);
+    }
+    
+    while (frequency.size() > 0) {
+      int mi = 0;
+      char c = 0;
+      for (Entry<Character, Integer> e : frequency.entrySet()) {
+        if (mi < e.getValue()) {
+          mi = e.getValue();
+          c = e.getKey();
+        }
+      }
+      this.decoded = this.decoded.replace(c, this.nextFreq());
+      frequency.remove(c);
+    }
+  }
+    ]]>
+</programlisting>
+
+<para>
+  Már csak a  "main "ben meghívott  "Decode " függvény tárgyalása maradt hátra. Nem túltárgyalva, ez az a függvény, amely az előzőleg tárgyalt függvényeket és gyakorisági listát felhasználva végzi el a dekódolást. Nyilván a while függvényből láthatjuk, hogy mindezt addig teszi, amíg karaktereink el nem fogytak.
+</para>
+
+    </section>  
+    
+    <section>
+       <title>Változó argumentumszámú ctor és Összefoglaló</title>
+        <para>
+          Készítsünk olyan példát, amely egy képet tesz az alábbi projekt Perceptron osztályának bemenetére
+és a Perceptron ne egy értéket, hanem egy ugyanakkora méretű „képet” adjon vissza. (Lásd még a 4
+hét/Perceptron osztály feladatot is.)
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Arroway!/Gagyi">   https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Arroway!/Gagyi </link> 
+        </para>
+         <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+        <para>Források:</para>
+        <para>
+          <link xlink:href="http://www.cs.ubbcluj.ro/~csatol/mestint/pdfs/neur_halo_alap.pdf">http://www.cs.ubbcluj.ro/~csatol/mestint/pdfs/neur_halo_alap.pdf</link>
+        </para>
+        <para>
+          <link xlink:href="https://www.tankonyvtar.hu/hu/tartalom/tamop425/0026_neuralis_4_4/ch04.html">https://www.tankonyvtar.hu/hu/tartalom/tamop425/0026_neuralis_4_4/ch04.html</link>
+        </para>
+        <para>
+          <link xlink:href="https://gyires.inf.unideb.hu/GyBITT/19/ch03s02.html">https://gyires.inf.unideb.hu/GyBITT/19/ch03s02.html</link>
+        </para>
+        <para>
+          Érdemes lenne először a fogalmakat megmagyarázni.</para>
+          <para>
+            Először is, hogyan lehet egy konstruktor változó argumentumszámú és hogyan jelenik meg ez a mi példánkban?
+          </para>
+          <programlisting language="C++"><![CDATA[
+          class Perceptron
+          {
+          public:
+            Perceptron ( int nof, ... )
+            {
+          ]]></programlisting>
+
+          <para>
+            Változó argumentumszámú konstruktorról akkor beszélhetünk, mikor nincsen egyértelműen definiálva, egy konstruktornak hány paraméterrel kell rendelkeznie. A mi programunk mlp.hpp header-fájljában is ezzel találkozhatunk. Ebből annyit olvashatunk le, hogy egy argumentumot fixen tartalmaznia kell (ez esetünkben az Integer típusú <function>nof</function> lesz), a változó argumentumszámot pedig a "..." karaktersorozat jelzi számunkra.
+          </para>
+
+          <para>
+            A perceptron nem más mint ezen neuron mesterséges intelligenciában használt változata. Szintén tanulásra képes, a bemenő 0-k és 1-esek sorozatából mintákat tanul meg és súlyozott összegzést végez. Ennek több változata is létezik, mi ezen feladat során a többrétegűekkel fogunk foglalkozni, ez a Multi Layer Perceptron (MLP), amely az egyik, ha nem a leggyakrabban használt hálózat-architektúra. Ez a fajta neurális hálózat 3 rétegből épül fel, melyek a következők: bemeneti réteg: azok a neuronok találhatók itt, amelyek a bemeneti jel
+továbbítását végzik a hálózat felé. A legtöbb esetben nem jelöljük őket külön; rejtett réteg: a tulajdonképpeni feldolgozást végző neuronok tartoznak ide.
+Egy hálózaton belül több rejtett réteg is lehet; kimeneti réteg: az itt található neuronok a külvilág felé továbbítják az
+információt. A feladatuk ugyanaz, mint a rejtett rétegbeli neuronoké.</para>
+          
+        <para>
+          Amint már említettem, a többrétegű perceptron minden egyes rétege neuronokból áll. Biztosítani kell azonban, hogy a neurális hálózatunk kimenete a súlyok folytonos, differenciálható függvénye legyen.
+        </para>
+        <para>
+          Fontos az is, hogyan történik a neurális hálónk tanítása. A tanítási folyamat egy ún. ellenőrzött tanítás, ahol a hálózat kimenetén értelmezett hiba felhasználásával határozhatjuk meg a kritériumfüggvény vagy kockázat paraméterfüggését. A tanítás leggyakrabban a hiba-visszaterjesztéses módszerrel valósul meg. A tanítás fő lépései:
+
+a kezdeti súlyok megadása;
+
+a bemeneti jelet (azaz a tanító pontot) végigáramoltatjuk a hálózaton, de a súlyokat nem változtatjuk meg;
+
+Az így kapott kimeneti jelet összevetjük a tényleges kimeneti jellel;
+
+A hibát visszaáramoltatjuk a hálózaton, súlyokat pedig megváltoztatjuk a hiba csökkentése érdekében.
+        </para>
+  
+        <para>A következő feladat során egy ilyen perceptront fogunk elkészíteni, aminek alapvetően a feladata az, hogy a <function>mandelbrot.cpp</function> programunk által létrehozott Mandelbrot-halmazt ábrázoló (elsomandel.png) PNG képet felhasználva generáltassunk egy vele megegyező méretű képet. Lássuk a programot!</para>
+        <para>
+          Kezdjük a feladat értelmezésével. A feladat szinte ugyanazt kéri, mint az előző Perceptronos feladatainkál egy kis csavarral. Ugyanis az eddigi példáink során a Perceptronunk egy képállományra egy értéket adott vissza.
+        </para>
+        <para>A kód eleje megegyezik az előző fejezetben már tárgyaltéval ezért az elemzés egy része onnan került átemelésre, innen a hasonlóság.</para>
+
+        <programlisting language="C++"><![CDATA[
+          #include <iostream>
+          #include "mlp.hpp"
+          #include <png++/png.hpp>
+    ]]></programlisting>
+
+        <para>Include-oljuk az iostream, az <function>mlp</function> és a <function>png++/png</function> könyvtárakat. Utóbbi kettőt azért, mert többrétegű perceptront akarunk majd létrehozni (Multi Layer Perceptron), így muszáj ezt a könyvtárat include-olnunk a programunkba. Utolsó könyvtárunk ahogy a neve is sugallja, a PNG képállományokkal való munkát teszi lehetővé. Előzőleg telepíteni szükséges, ha nem megtalálható a gépünkön.</para>
+
+        <programlisting language="C++"><![CDATA[   
+          using namespace std;
+
+          int main(int argc, char **argv)
+          {
+            png::image <png::rgb_pixel> png_image(argv[1]);
+
+            int size = png_image.get_width()*png_image.get_height();
+
+            Perceptron *p = new Perceptron(3, size, 256, size);
+    ]]></programlisting>
+
+      <para>Kezdődik a main függvényünk. Első sorában megmondjuk, hogy az 1-es parancssori argumentum alapján kerül beolvasásra a képállomány. Ettől kezdve dolgozni tudunk A kép méretét a <function>get_width</function> és a <function>get_height</function> szorzatából kapjuk, ezt el is tároljuk egy változóban. A következő sorban létrehozásra példányosítunk egy perceptront a <varname>new</varname> operátor segítségével, amely paraméterei balról jobbra haladva: a rétegek száma, 1. réteg neuronjai az inputrétegben, 2. réteg neuronjai az inputrétegben, az eredmény (jelen esetben egy, a már megszokott szám helyett egy képállomány)</para>
+      <programlisting language="C++"><![CDATA[
+      double* image = new double[size];
+
+      for(int i=0; i<png_image.get_width(); ++i)
+        for(int j=0; j<png_image.get_height(); ++j)
+          image[i*png_image.get_width()+j] = png_image[i][j].red;
+      ]]></programlisting>
+
+      <para>
+        Létrehozásra kerül egy <varname>double</varname> típusú mutató.
+        Jönnek a for ciklusok. Az egyik for ciklus végigmegy a kép szélességét alkotó pontokon, a másik pedig a magasságán. Miután végigmentünk a képpontokon, az <varname>image</varname> tárolni fogja a képállomány vörös színkomponensét. Tehát a beolvasásra került képállomány piros vörös komponensét a lefoglalt tárba másoljuk bele.</para>
+
+      <programlisting language="C++"><![CDATA[
+      double* newPicture = (*p) (image); // eddig: double value = (*p)(image);
+      
+      for (int i = 0; i<png_image.get_width(); ++i)
+      for (int j = 0; j<png_image.get_height(); ++j)
+        png_image[i][j].red = newPicture[i*png_image.get_width()+j];
+    
+      png_image.write("kimeneti.png");
+
+      delete p;
+      delete [] image;
+      ]]></programlisting>
+
+      <para>Itt válik érdekessé a dolog, hiszen már nem "csak" egy értéket akarunk kiiratni, hanem egy képet generáltatni, ahhoz azonban az egy double csillag típusra van már szükségünk. Ezt követően két for ciklussal végigmegyünk az eredeti kép szélességén és magasságán és az új képünk megkapja a színadatokat. Ezt követően a <function>write</function> függvénnyel létrehozásra kerül az új képállományunk kimeneti néven, png formátumban.</para>
+
+      <para>
+      	A végén törlésre kerülnek az eddig, de tovább már nem használatos elemeket, hiszen a számukra eddig fenntartott memóriaterületet érdemes felszabadítanunk, így a lefoglalt memóriamennyiség újra használható. Programunk ezzel véget is ért.
+      </para>
+
+      <para>Természetesen ahhoz, hogy megfelelően működjön a programunk, többek között bele kellett nyúlni egy kicsit az <function>mlp.hpp</function> fájlba is.</para>
+
+      <programlisting language="C"><![CDATA[
+      double* operator() ( double image [] )
+      {
+      ]]></programlisting>
+
+      <para>Többek között az () operátor működésébe is, ami mostantól nem egy double értéket, hanem egy double pointert ad vissza.</para>
+
+      <para>Fordítsuk és futtassuk a programunkat!</para>
+
+      <para>És az eredmény:</para>
+
+    </section>       
+        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</chapter>                
