@@ -17,7 +17,7 @@
             Megoldás videó:
         </para>
         <para>
-            Megoldás forrása: <link xlink:href=""></link>        
+            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20G%C3%B6del!/Gengszterek">https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20G%C3%B6del!/Gengszterek</link>        
         </para>
         <para>
           <link xlink:href="https://github.com/nbatfai/robocar-emulator">https://github.com/nbatfai/robocar-emulator</link>
@@ -54,7 +54,7 @@
         </programlisting>
         </para>
         <para>
-            A <function>gangsters</function> vektor kerül rendezésre, ezt a <function>sort</function> függvény első és második paramétere teszi számunkra világossá (gangsters.begin() és gangsters.end()). A harmadik paraméter nem lesz más, mint maga a lambda-kifejezésünk. Ezen lambda-kifejezés paramétere két Gangster lesz. A kifejezés egy boolean értéket, pontosabban true-t ad vissza, ha az x gengszter és a rendőr távolsága kisebb, mint az y gengszter és a rendőr távolsága.
+            A  "gangsters " vektor kerül rendezésre, ezt a  "sort " függvény első és második paramétere teszi számunkra világossá (gangsters.begin() és gangsters.end()). A harmadik paraméter nem lesz más, mint maga a lambda-kifejezésünk. Ezen lambda-kifejezés paramétere két Gangster lesz. A kifejezés egy boolean értéket, pontosabban true-t ad vissza, ha az x gengszter és a rendőr távolsága kisebb, mint az y gengszter és a rendőr távolsága.
         </para>
 
         <para>
@@ -62,7 +62,7 @@
         </para>
 
         <para>
-            A feladat megoldása során egyébént az utolsó sorban található <function>sort</function> függvényt használtuk, melynek harmadik paramétere lehetővé teszi, hogy kézzel adjuk meg az összehasonlítási szemponto(ka)t. Ez esetünkben a lambda-kifejezés.
+            A feladat megoldása során egyébént az utolsó sorban található  "sort " függvényt használtuk, melynek harmadik paramétere lehetővé teszi, hogy kézzel adjuk meg az összehasonlítási szemponto(ka)t. Ez esetünkben a lambda-kifejezés.
         </para>
 
 
@@ -70,6 +70,448 @@
         </section>
       
 
+ <section>
+        <title>STL map érték szerinti rendezése</title>
+        <para>
+          Például:
+      <link xlink:href="https://github.com/nbatfai/future/blob/master/cs/F9F2/fenykard.cpp#L180">https://github.com/nbatfai/future/blob/master/cs/F9F2/fenykard.cpp#L180</link>
+          </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20G%C3%B6del!/STL%20map%20%C3%A9rt%C3%A9k%20szerinti%20rendez%C3%A9se">https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20G%C3%B6del!/STL%20map%20%C3%A9rt%C3%A9k%20szerinti%20rendez%C3%A9se</link>
+
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+        <para>
+            Az STL (Standard Template Library) olyan C++ sablon- vagy mintaosztályok összessége, amelyek implementálnak -ezzel lehetőséget adva használatukra- számos, széles körben előszeretettel használt algoritmus és adatszerkezet használatát. Három fő dolgot tartalmaz: tárolókat, algoritmusokat és iterátorokat.
+        </para>
+        <para>
+            Esetünkben a tárolók lesznek érdekesek, sőt, abból is egy különleges fajta, a <emphasis role = "strong">map</emphasis>. Mit érdemes tudni róla? Asszociatív tárolók, vagyis a kulcsuk által azonosíthatók az elemek. Ezzel le is lőttem a poént, kulcs-érték párokat tartalmaz. A benne található elemek minden esetben rendezettek, azok kulcsuk alapján.
+        </para>
+             <para>
+            Bevezető forrása: <link xlink:href="https://hu.wikipedia.org/wiki/T%C3%A1rol%C3%B3k_(STL)#%3Cmap%3E">link</link>, <link xlink:href="http://www.cplusplus.com/reference/map/map/">link</link>
+        </para>
+        <para>
+            Ez elő is vetíti számunkra a feladatot...Hiszen most nem kulcsuk, hanem értékük szerint kellene rendeznünk a map-et. Nézzük a megoldást!
+        </para>
+        <programlisting language="C++"><![CDATA[
+
+        #include <map>
+        #include <iostream>
+        #include <algorithm>
+        #include <vector>
+
+        std::vector<std::pair<std::string, int>> sort_map ( std::map <std::string, int> &rank )
+        {
+                std::vector<std::pair<std::string, int>> ordered;
+
+                for ( auto & i : rank ) {
+                        if ( i.second ) {
+                                std::pair<std::string, int> p {i.first, i.second};
+                                ordered.push_back ( p );
+                        }
+                }
+
+                std::sort (
+                        std::begin ( ordered ), std::end ( ordered ),
+                [ = ] ( auto && p1, auto && p2 ) {
+                        return p1.second > p2.second;
+                }
+                );
+
+                return ordered;
+        }
+        ]]></programlisting>
+
+        <para>
+      
+            A megoldás a fénykard programból lett átemelve. A  "sort_map " függvényünk fogja megvalósítani az érték szerinti rendezést. A függvény visszatérési értéke vektorpárok lesznek. Mi történik a függvénytörzsön belül? Először is létrehozzuk a vektort, ami a visszatérési értékünk lesz  "ordered " névvel. Majd egy for végigmegyünk a  "rank " map-en. Azt nézi, hogy vannak-e a vektorban érték párosok. Ha vannak, akkor egy  "pair "be kerülnek bele. Ezeket a  "pair "eket pedig az  "ordered " vektorba nyomjuk.
+        </para>
+        <para>
+
+          Az értékpárokkal feltöltött vektor rendezéshez segítségül a már ismert az  "std::sort " függvényt hívjuk meg ami harmadik paramétereként egy, szögletes zárójellel bevezetett lambda kifejezést alkalmazva rendez úgy, hogy végigmegy a vektorunkon és igazzal tér vissza abban az esetben, ha az első visgált paraméter nagyobb, mint a második. 
+
+          A függvényünk visszatérési értéke a  "ordered ", már rendezett vektor lesz. 
+        </para>
+
+        <programlisting language="C++"><![CDATA[
+        int main()
+        {
+            std::map<std::string, int> map;
+            map["a"]=33;
+            map["b"]=45;
+            map["c"]=7;
+
+            std::vector<std::pair<std::string, int>> sorted = sort_map(map);
+
+            for(auto & i : sorted)
+            {
+                std::cout <<i.first << " " <<i.second << std::endl;
+            }
+        }
+        ]]></programlisting>
+
+            <para>
+              A  "main "ben létrehozunk egy map-et, azt feltöltjük elemekkel, majd az előbb tárgyalt  "sort_map " függvénnyel rendezzük azt. Ezt, a rendezés utáni állapotot egy új,  "sorted " vektorban tároljuk el. Majd végül egy for ciklussal végigmegyünk új vektorunkon és kiiratjuk a rendezés utáni állapotot.
+        </para>
+
+        <para>
+            Fordítás és futtatás után a kis mintaprogramunk a következő eredménnyel tér vissza:
+        </para>
+
+    
+        
+    </section>
+
+<section>
+        <title>Alternatív Tabella rendezése</title>
+        <para>
+          Mutassuk be a <link xlink:href="https://progpater.blog.hu/2011/03/11/alternativ_tabella">https://progpater.blog.hu/2011/03/11/alternativ_tabella</link> a programban a java.lang Interface <![CDATA[Comparable<T>]]> szerepét!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20G%C3%B6del!/Alternat%C3%ADv%20Tabella%20rendez%C3%A9se"> https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20G%C3%B6del!/Alternat%C3%ADv%20Tabella%20rendez%C3%A9se</link>  
+        </para>
+         
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+        <para>
+            Talán érdemes lenne azzal kezdeni, mi is az az alternatív tabella? Az alternatív tabella nem más, mint az egyes futballbajnokságokhoz készített olyan sorrend, ami nem a megszokott módon (amikor is a győzelem 3 , a döntetlen 1, a vereség pedig 0 pontot ér...) számolja a csapatok sorrendjét, hanem megpróbálja figyelembe venni azt, hogy egy adott csapat éppen melyik másik csapattal szemben érte el az éppen adott eredményét. Hiszen ha belegondolunk, a valóságban is "értékesebbnek" tartjuk a csapatunk által szerzett azt a 3 pontot, amelyet valamelyik éllovas ellen szerzett, mintsem azt, amelyet az éppen aktuális kiesőjelöltek ellen sikerült begyűjteni.
+        </para>
+        <para>
+            Az alternatív tabellák elkészítésének egyik módja, hogy a Google PageRank algoritmusát használjuk fel ehhez. Tehát ez esetben az alternatív sorrend úgy alakul ki, hogy az a csapat kerül rajta előrébb, amely előkelőbb helyen lévő csapatoktól szerez pontot.
+        </para>
+
+        <para>
+            A bevezető forrása: <link xlink:href="https://hu.wikipedia.org/wiki/Alternat%C3%ADv_tabella"> https://hu.wikipedia.org/wiki/Alternativ_tabella</link>  
+        </para>
+
+
+
+        <para>Az eredeti- és az alternatív tabella összehasonlítása. A kép forrása: <link xlink:href="https://progpater.blog.hu/2011/03/11/alternativ_tabella?token=092c03fe838c5084bbe4b49d2b328e1d"> link</link>  </para>
+        
+        <para>Most nézzük meg a feladat által kért interface-t!</para>
+
+        <programlisting language="Java"><![CDATA[
+          class Csapat implements Comparable<Csapat> 
+          {
+          protected String nev;
+          protected double ertek;
+
+          public Csapat(String nev, double ertek) {
+            this.nev = nev;
+            this.ertek = ertek;
+          }
+
+          public int compareTo(Csapat csapat) {
+            if (this.ertek < csapat.ertek) {
+              return -1;
+            } else if (this.ertek > csapat.ertek) {
+              return 1;
+            } else {
+              return 0;
+            }
+                }
+              }
+            ]]></programlisting> 
+
+              <para>Íme a java.lang package Comparable interface melyet a  "Csapat " osztály implementál. Két objektum kerül összehasonlításra a  "compareTo " függvénnyel, az aktuális, a hívottal. Ha a hívó objektum értéke kisebb, mint a paraméterként átadott objektumé, akkor - 1-t ad vissza, fordított esetben 1-et, egyenlőség esetén 0-t.</para>
+
+              <para>Miért is jó nekünk ez? A programunk következő sorai miatt:</para>
+              <programlisting language="Java"><![CDATA[
+
+              java.util.List<Csapat> rendezettCsapatok = java.util.Arrays.asList(csapatok);
+          java.util.Collections.sort(rendezettCsapatok);
+          ]]></programlisting> 
+
+          <para>
+              Egy kis magyarázat ehhez a kódcsipethez..Létrejön a  "Csapat " típusú,  "rendezettCsapatok " névre hallgató listánk, amelyet a következő sorban a  "sort " metódussal rendezünk. Kis utánajárást követően megtaláltam, miért cselekedtünk az előzőekben úgy, ahogy. A  "sort " metódus nem mindenfajta listán működik, hanem csakis olyanokon melynek tagjai implementálják a tárgyalt  "Comparable " interface-t. 
+          </para>
+          <para>
+              Ennek "bizonyítéka", mely megtalálható a jdk-ban:
+          </para>
+          <para>
+
+          <programlisting><![CDATA[
+      "Lists (and arrays) of objects that implement this interface can be sorted
+      automatically by {@link Collections#sort(List) Collections.sort} (and
+      {@link Arrays#sort(Object[]) Arrays.sort}).  Objects that implement this
+      interface can be used as keys in a {@linkplain SortedMap sorted map} or as
+      elements in a {@linkplain SortedSet sorted set}, without the need to
+      specify a {@linkplain Comparator comparator}."
+          ]]></programlisting> 
+          </para>
+          <para>
+              Úgy gondolom, így már mindenképp érthetőbb a megoldásunk.
+          </para>
+          <para>Azt érdemes megemlíteni, hogy a szükségünk lesz a  "Wiki2Matrix.java " állományra melyet ha lefuttatunk, egy linkmátrixszal leszünk gazdagabbak. A linkmátrix tartalmát az  "AlternativTabella.java " kódunkba szükséges illesztenünk, az  "L " kétdimenziós tömbbe. Csak ezután fordíthatjuk és futtathatjuk utóbb említett fájlunkat.</para>
+
+          <para>Fordítás és futtatás után:</para>
+
+
+
+    </section>
+
+                  
+
+<section>
+        <title>GIMP Scheme hack</title>
+        <para>
+            Ha az előző félévben nem dolgoztad fel a témát (például a mandalás vagy a króm szöveges
+          dobozosat) akkor itt az alkalom!
+          </para>
+
+          <para>
+        </para>
+        <para>
+            <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20G%C3%B6del!/GIMP%20Scheme%20hack">https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20G%C3%B6del!/GIMP%20Scheme%20hack</link>
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para> 
+          
+         <para> A most következő feladat során a Lisp programnyelvek egyik képviselőjével fogunk dolgozni, a <link xlink:href="https://hu.wikipedia.org/wiki/Scheme">Scheme</link> nyelvvel. A Scheme programnyelv is a Lisp programnyelvek családjába tartozik. Az 1970-es évek közepén jelent meg de egyszerűsége miatt mind a mai találkozhatunk Scheme-kódokkal.
+        </para>
+        <para>
+            A most következő feladat során a Scheme egyik dialektusát, a Script-Fu-t fogjuk használni arra, hogy az előző feladat során már megismert GIMP képszerkesztő programhoz egy olyan scriptet írjunk, ami lehetővé teszi a bemenetként megadott szöveg "króm effektezését". Ezen script megírásához használhatjuk a már előző feladat során látott Script-Fu-konzolt is.
+        </para>
+
+        <para>Lássuk, hogy néz ez ki (.scm kiterjesztésű) kód formájában!</para>
+        <programlisting><![CDATA[
+        (define (color-curve)
+        (let* (
+            (tomb (cons-array 8 'byte))
+        )
+            (aset tomb 0 0)
+            (aset tomb 1 0)
+            (aset tomb 2 50)
+            (aset tomb 3 190)
+            (aset tomb 4 110)
+            (aset tomb 5 20)
+            (aset tomb 6 200)
+            (aset tomb 7 190)
+              tomb)    
+          )
+          ]]></programlisting>
+          <para>Definiáljuk a  "color-curve " függvényünket amivel egy tömböt töltünk fel 8 különböző értékkel. Ez a függvény még visszaköszön majd a feladat során a 9. lépésnél.</para>
+
+          <programlisting><![CDATA[
+          (define (elem x lista)
+
+          (if (= x 1) (car lista) (elem (- x 1) ( cdr lista ) ) )
+
+          )
+
+          (define (text-wh text font fontsize)
+          (let*
+              (
+                  (text-width 1)
+                  (text-height 1)
+              )
+          
+              (set! text-width (car (gimp-text-get-extents-fontname text fontsize PIXELS font)))    
+              (set! text-height (elem 2  (gimp-text-get-extents-fontname text fontsize PIXELS font)))    
+              
+              (list text-width text-height)
+              )
+          )
+          ]]></programlisting>
+
+          <para>
+              Ebben a részben két függvény is definiálásra kerül. Az első,  "elem " függvény egy paraméterként megadott listából szintén paraméterként megadott sorszámú elem értékét adja vissza. Ez a függvény felhasználásra is kerül a következő  "text-wh " függvény során is, amely függvénynek a visszatérési értéke egy lista melyben a font szélessége és magassága található meg.
+
+          </para>
+
+          <programlisting><![CDATA[
+          (define (script-fu-bhax-chrome text font fontsize width height color gradient)
+              (let*
+              (
+                  (image (car (gimp-image-new width height 0)))
+                  (layer (car (gimp-layer-new image width height RGB-IMAGE "bg" 100 LAYER-MODE-NORMAL-LEGACY)))
+                  (textfs)
+                  (text-width (car (text-wh text font fontsize)))
+                  (text-height (elem 2 (text-wh text font fontsize)))
+                  (layer2)        
+              )
+          ]]></programlisting>
+
+              <para>
+                  Az első sorban definiálásra kerül a scriptünk, ahol az látható, hogy a script nevét szóközzel elválasztva követik a paraméterek.
+              </para>
+              <para>
+                  Ezt követi a  "let* " függvény ami két részből áll, ezekből az elsőt tárgyaljuk ki ebben a bekezdésben. Ez az ún. "varlist" rész, itt azok a változók kerülnek deklarálásra, amelyeket a későbbiekben sokat fogunk használni. A több helyen is használt  "car " függvény a GIMP eljárások és függvények által visszaadott listájának első elemét adja vissza. Természetesen bármilyen megkapott lista első elemét is visszaadja, nem csupán a GIMP-eseket...
+              </para>
+
+          <programlisting><![CDATA[
+          ;step 1
+          (gimp-image-insert-layer image layer 0 0)
+          (gimp-context-set-foreground '(0 0 0))
+          (gimp-drawable-fill layer  FILL-FOREGROUND )
+          (gimp-context-set-foreground '(255 255 255))
+          ]]></programlisting>
+
+              <para>
+              Első lépésként az effektelni kívánt szöveget fehér betűszínnel fekete háttérre kell írnunk.
+              </para>
+              <para>A megoldáshoz a GIMP eljárásböngészőjét hívjuk segítségül, ahol a keresőbe bepötyögve a megfelelő függvény/eljárás nevét, minden információt megkapunk róla.</para>
+              <para>A  "gimp-image-insert-layer " egy új réteget ad hozzá képünkhoz, első paramétere a kép maga, második a réteg, harmadik a szülő-réteg, ami jelen esetünkben nincs (ezért 0), az utolsó paraméter a pozíciója a rétegnek, ami jelen esetben 0, hiszen a legfelső rétegnek szeretnénk.
+              </para>
+              <para>A  "gimp-context-set-foreground " eljárással az előtérszínt RGB(0 0 0)-ra, vagyis feketére állítjuk. A  "gimp-drawable-fill layer " eljárássalrétegünket kitöltjük az előtérszínnel. Újra a  "...set-foreground " eljárást használjuk, az előtérszínt most fehérre állítjuk.</para> 
+
+          <programlisting><![CDATA[
+          (set! textfs (car (gimp-text-layer-new image text font fontsize PIXELS)))
+          (gimp-image-insert-layer image textfs 0 0)   
+          (gimp-layer-set-offsets textfs (- (/ width 2) (/ text-width 2)) (- (/ height 2) (/ text-height 2)))
+            
+          (set! layer (car(gimp-image-merge-down image textfs CLIP-TO-BOTTOM-LAYER)))     
+          ]]></programlisting>
+
+              <para>
+                  A  "set! "-tel a "gimp-text-layer-new " függvény által a megfelelő paraméterekkel elkészített, majd visszaadott réteget beállítjuk  "textfs " névre. Ezt a réteget a következő sorban az  "..image-insert-layer " eljárással beszúrjuk.
+              </para>
+              <para>
+                  A  "gimp-layer-set-offsets " eljárással a rétegünket középre pozícionáljuk. Az utolsó sorban a  "gimp-image-merge-down " függvénnyel lefelé haladva összefésüljük a rétegeinket és ezt a  "layer " változóban tároljuk.
+              </para>
+
+              <para>
+                  Az első lépés után ez a képünk:
+              </para>
+
+
+              <para>
+                  <emphasis role = "strong">A második lépés:</emphasis> Gauss-elmosás alkalmazása
+              </para>
+          <programlisting><![CDATA[
+          (plug-in-gauss-iir RUN-INTERACTIVE image layer 15 TRUE TRUE)
+          ]]></programlisting>
+          <para>
+                  Az eljárás paraméterei a következők: futási mód (esetünkben ez RUN-INTERACTIVE), a kép maga, "rajzolható input"(nekünk a réteg), az elmosódás pixelben mért sugara, elmosódás vízszintesen, elmosódás függőlegesen.
+              </para>
+
+              <para>
+                  A lépés után ez a képünk:
+              </para>
+
+
+
+              <para>
+                  <emphasis role = "strong">A harmadik lépés:</emphasis> játék a színszintekkel
+              </para>
+
+          <programlisting><![CDATA[
+          (gimp-drawable-levels layer HISTOGRAM-VALUE .11 .42 TRUE 1 0 1 TRUE)
+          ]]></programlisting>
+              <para>Az első paraméter, hogy min végezze el a műveletet a függvény, nekünk természetesen a rétegünkön kell majd, hogy elvégezve legyen. Minden további paraméter az egyes színértékekkel kapcsolatos, az Eljárásböngészőből kikeresgélhetőek.  </para>
+
+              <para>
+                  A lépéssel a képünk:
+              </para>
+
+
+              <para>
+                  <emphasis role = "strong">A negyedik lépés:</emphasis> Gauss-elmosás, újra
+              </para>
+          <programlisting><![CDATA[
+          (plug-in-gauss-iir RUN-INTERACTIVE image layer 2 TRUE TRUE)
+          ]]></programlisting>
+          <para>A paraméterek megegyeznek a nemrég nézett Gauss-elmosást létrehozó eljáráséval, egyedül az elmosás sugara kisebb most, mint az előbb volt, így ez most egy enyhébb elmosást eredményez, szinte nem is látható a különbség az előző képhez képest:</para> 
+
+
+              <para>
+                  <emphasis role = "strong">Az ötödik lépés:</emphasis> A fekete rész szín szerinti kijelölése majd a kijelölés invertálása
+              </para>
+          <programlisting><![CDATA[
+          (gimp-image-select-color image CHANNEL-OP-REPLACE layer '(0 0 0))
+          (gimp-selection-invert image)
+          ]]></programlisting>
+
+          <para>
+              A  "gimp-image-select-color " eljárással történik a kijelölés. Paraméterei: melyik képen kerül majd alkalmazásra, a kijelöléshez használatos művelet, "rajzolható input" és a kijelölendő szín.
+          </para>
+          <para>A  "gimp-selection-invert " pedig az egyetlen paraméterként kapott képen megfordítja a kijelölést.</para>
+
+
+          <para>
+                  <emphasis role = "strong">A hatodik lépés:</emphasis> "Lebegő átlátszó kijelölés létrehozása"
+              </para>
+          <programlisting><![CDATA[
+          (set! layer2 (car (gimp-layer-new image width height RGB-IMAGE "2" 100 LAYER-MODE-NORMAL-LEGACY)))
+          (gimp-image-insert-layer image layer2 0 0)
+          ]]></programlisting>
+
+          <para>Az első sorban a  "set! "-tel  "layer2-t " egy új rétegként állítjuk be, mely réteget a  "gimp-layer-new " függvény állított elő a képen látható paraméterekkel. Ezek közül a 6. a legérdekesebb ami nem más, mint az opacitás (áttetszőség) amit 100-ra állítottunk be. A következő réteget beillesztjük a már előzőek során is látott  "gimp-image-insert-layer " eljárással.</para>
+
+
+          <para>
+                  <emphasis role = "strong">A hetedik lépés:</emphasis> "Az áttetszősség kitöltése átmenettel
+              </para>
+          <programlisting><![CDATA[
+          (gimp-context-set-gradient gradient) 
+          (gimp-edit-blend layer2 BLEND-CUSTOM LAYER-MODE-NORMAL-LEGACY GRADIENT-LINEAR 100 0 REPEAT-NONE 
+              FALSE TRUE 5 .1 TRUE width (/ height 3) width  (- height (/ height 3)))
+          ]]></programlisting>
+
+          <para>Az első eljárás beállítja az elsődleges átmenetet, a  "gimp-edit-blend " eljárás pedig egy kezdő- és végpont között egy "keverést" hoz létre a paraméterek segítségével, melyekről bővebben az Eljárásböngészőben lehet olvasni. </para>
+
+          <para>Így állunk jelenleg:</para>
+          <para>
+                  <emphasis role = "strong">A nyolcadik lépés:</emphasis> Buckaleképezés alkalmazása
+              </para>
+
+          <programlisting><![CDATA[
+          (plug-in-bump-map RUN-NONINTERACTIVE image layer2 layer 120 25 7 5 5 0 0 TRUE FALSE 2)
+          ]]></programlisting>
+          <para>A  "plug-in-bump-map "-pel buckaleképezést hozunk létre a layer2-n, bemenetként felhasználva másik rétegünket.</para>
+
+
+
+          <para>
+                  <emphasis role = "strong">A kilencedik lépés:</emphasis> Színgörbékkel való játék
+              </para>
+
+          <programlisting><![CDATA[
+          (gimp-curves-spline layer2 HISTOGRAM-VALUE 8 (color-curve))
+          ]]></programlisting>
+          <para>A fémesebb hatás érdekében  "gimp-curves-spline "-nal ügyeskedünk még és voilá, kész is vagyunk:</para>
+
+          
+                
+          <programlisting><![CDATA[
+              (script-fu-register "script-fu-bhax-chrome"
+                  "Chrome3"
+                  "Creates a chrome effect on a given text."
+                  "Norbert Bátfai"
+                  "Copyright 2019, Norbert Bátfai"
+                  "January 19, 2019"
+                  ""
+                  SF-STRING       "Text"      "Bátf41 Haxor"
+                  SF-FONT         "Font"      "Sans"
+                  SF-ADJUSTMENT   "Font size" '(100 1 1000 1 10 0 1)
+                  SF-VALUE        "Width"     "1000"
+                  SF-VALUE        "Height"    "1000"
+                  SF-COLOR        "Color"     '(255 0 0)
+                  SF-GRADIENT     "Gradient"  "Crown molding"    
+              )
+              (script-fu-menu-register "script-fu-bhax-chrome" 
+                  "<Image>/File/Create/BHAX"
+              )
+          ]]></programlisting>
+              <para>
+                  A scriptet ha nem a script-konzolon keresztül szeretnénk beadni, hanem inkludálni szeretnénk, hogy a GIMPen belül könnyebben használható legyen, függvényt kell használnunk hozzá. Ezt teszi a  "script-fu-register " függvény, amely definiálása során alapértelmezett értékeket is megadunk.
+              </para>
+              <para>
+                  A kódunk zárásaként megírjuk az ún. "Menübe regisztráló függvényt". Ahogy az elnevezés is sugallja, ezen függvény hatására tudjuk majd kiválasztani grafikusan is, a menüből a scriptünket.
+              </para> 
+          
+    </section>
+
     <section>
         <title> </title>
         <para>        </para>
@@ -78,7 +520,7 @@
             Megoldás videó:
         </para>
         <para>
-            Megoldás forrása:  <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Stroustrup!/JDK%20oszt%C3%A1lyok ">https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Stroustrup!/JDK%20oszt%C3%A1lyok</link>               
+            Megoldás forrása:  <link xlink:href=""> </link>               
         </para>
         <para>         </para>
     </section>  
@@ -91,7 +533,7 @@
             Megoldás videó:
         </para>
         <para>
-            Megoldás forrása:  <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Stroustrup!/JDK%20oszt%C3%A1lyok ">https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Stroustrup!/JDK%20oszt%C3%A1lyok</link>               
+            Megoldás forrása:  <link xlink:href="  "> </link>               
         </para>
         <para>         </para>
     </section>  
@@ -104,7 +546,7 @@
             Megoldás videó:
         </para>
         <para>
-            Megoldás forrása:  <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Stroustrup!/JDK%20oszt%C3%A1lyok ">https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Stroustrup!/JDK%20oszt%C3%A1lyok</link>               
+            Megoldás forrása:  <link xlink:href="  "> </link>               
         </para>
         <para>         </para>
     </section>  
