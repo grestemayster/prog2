@@ -1,0 +1,113 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Gödel!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+
+     <section>
+        <title>Gengszterek</title>
+        <para>
+          Gengszterek rendezése lambdával a Robotautó Világbajnokságban
+          <link xlink:href="https://youtu.be/DL6iQwPx1Yw">https://youtu.be/DL6iQwPx1Yw</link>
+          (8:05-től)
+      </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href=""></link>        
+        </para>
+        <para>
+          <link xlink:href="https://github.com/nbatfai/robocar-emulator">https://github.com/nbatfai/robocar-emulator</link>
+        </para>
+        <para>
+        </para>
+
+        <para>
+            A Robocar World Championship (OOCWC = rObOCar World Championship) egy olyan projekt/platform mely lehetőséget ad/adott a robotautó-kutatásra. Az egész projekt középpontjában a Robocar City Emulator áll.
+        </para>
+
+        <para>
+        A lambda-kifejezések a C++ 11-es verziójában jelentek meg. Ezek a kifejezések lehetővé teszik számunkra az úgynevezett in-line function-ök írását, vagyis egy- vagy kevés soros függvényekét. Fontos, hogy ezek olyan függvények, melyekre tipikusan egyszer van szükségünk, többször nem akarjuk felhasználni őket. Lényegében "egyszer használatosak", ezért még nevet SEM adunk nekik. 
+        </para>
+        <para>Egy egyszerű példa lambda-kifejezésre:</para>
+        <programlisting language="C++"><![CDATA[
+        [](int x, int y) -> { return x + y; }]]>
+        </programlisting>
+        <para>
+        A szögletes zárójel jelzi számunkra, hogy lambda-kifejezés kezdődik. Ezután a zárójelekben a paraméterek találhatók, majd a nyilacskát követően a kapcsos zárójelek között a függvény maga található az elvégzendő művelettel. Itt dől el az is, mi lesz a visszatérési érték típusa.
+        </para>
+
+        <para>Forrás: <link xlink:href="https://en.cppreference.com/w/cpp/language/lambda">https://en.cppreference.com/w/cpp/language/lambda</link></para>
+
+        <para>Lássunk a mi példánkat!</para>
+        <para>
+        <programlisting language="C++"><![CDATA[
+        std::sort (gangsters.begin(), gangsters.end(), [this, cop] (Gangster x, Gangster y)
+        {
+            return dst (cop, x.to) < dst (cop, y.to);
+        });
+
+        void sort (RandomAccessIterator first, RandomAccessIterator last, Compare comp);]]>
+        </programlisting>
+        </para>
+        <para>
+            A <function>gangsters</function> vektor kerül rendezésre, ezt a <function>sort</function> függvény első és második paramétere teszi számunkra világossá (gangsters.begin() és gangsters.end()). A harmadik paraméter nem lesz más, mint maga a lambda-kifejezésünk. Ezen lambda-kifejezés paramétere két Gangster lesz. A kifejezés egy boolean értéket, pontosabban true-t ad vissza, ha az x gengszter és a rendőr távolsága kisebb, mint az y gengszter és a rendőr távolsága.
+        </para>
+
+        <para>
+        Tehát ha értelmezzük az előző pár sort, elmondhatjuk: ez esetben a vektorunk a gengszterek rendőrököz való távolsága alapján lesz rendezve.
+        </para>
+
+        <para>
+            A feladat megoldása során egyébént az utolsó sorban található <function>sort</function> függvényt használtuk, melynek harmadik paramétere lehetővé teszi, hogy kézzel adjuk meg az összehasonlítási szemponto(ka)t. Ez esetünkben a lambda-kifejezés.
+        </para>
+
+
+
+        </section>
+      
+
+    <section>
+        <title> </title>
+        <para>        </para>
+        <para>        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:  <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Stroustrup!/JDK%20oszt%C3%A1lyok ">https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Stroustrup!/JDK%20oszt%C3%A1lyok</link>               
+        </para>
+        <para>         </para>
+    </section>  
+
+    <section>
+        <title> </title>
+        <para>        </para>
+        <para>        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:  <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Stroustrup!/JDK%20oszt%C3%A1lyok ">https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Stroustrup!/JDK%20oszt%C3%A1lyok</link>               
+        </para>
+        <para>         </para>
+    </section>  
+
+    <section>
+        <title> </title>
+        <para>        </para>
+        <para>        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:  <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Stroustrup!/JDK%20oszt%C3%A1lyok ">https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Stroustrup!/JDK%20oszt%C3%A1lyok</link>               
+        </para>
+        <para>         </para>
+    </section>  
+        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</chapter>                
