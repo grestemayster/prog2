@@ -1,0 +1,404 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, !</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+
+    <section>
+        <title>FUTURE tevékenység editor </title>
+        <para>    Javítsunk valamit a ActivityEditor.java JavaFX programon!
+<link xlink:href="https://github.com/nbatfai/future/tree/master/cs/F6">https://github.com/nbatfai/future/tree/master/cs/F6</link> 
+Itt láthatjuk működésben az alapot:
+<link xlink:href="https://www.twitch.tv/videos/222879467">https://github.com/nbatfai/future/tree/master/cs/F6</link>     </para>
+        <para>        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:  <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hello!/F6  "> https://github.com/grestemayster/prog2/tree/master/Hello!/F6</link>               
+        </para>
+        <para> <function>  fejlesztés alatt... </function>     </para>
+    </section>  
+        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+   
+
+    <section>
+        <title>OOCWC Boost ASIO hálózatkezelése</title>
+        <para>
+          Mutassunk rá a scanf szerepére és használatára! <link xlink:href="https://github.com/nbatfai/robocar-
+emulator/blob/master/justine/rcemu/src/carlexer.ll
+        ">https://github.com/nbatfai/robocar-
+emulator/blob/master/justine/rcemu/src/carlexer.ll
+  </link>
+</para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hello!/OOCWC">https://github.com/grestemayster/prog2/tree/master/Hello!/OOCWC</link>    
+        </para>
+        <para>
+          <link xlink:href="https://github.com/nbatfai/robocar-emulator">https://github.com/nbatfai/robocar-emulator</link> 
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+
+
+        <para>
+            A Robocar World Championship (OOCWC = rObOCar World Championship) egy olyan projekt/platform mely lehetőséget ad/adott a robotautó-kutatásra. Az egész projekt középpontjában a Robocar City Emulator áll. A következőkben a "carlexer.ll"-ben található "scanf" függvény jelentőségével és használatával fogunk foglalkozni.
+        </para>
+<programlisting language="C++"><![CDATA[
+while (std::sscanf (data+nn, "<OK %d %u %u %u>%n", &idd, &f, &t, &s, &n) == 4)
+    {
+        nn += n;
+        gangsters.push_back (Gangster {idd, f, t, s});
+    }]]>
+</programlisting>
+
+<para>
+  Forrás: <link xlink:href="http://www.cplusplus.com/reference/cstdio/sscanf/">http://www.cplusplus.com/reference/cstdio/sscanf/</link>
+</para>
+
+ <para>
+A "sscanf" a sima "scanf" függvénnyel ellentétben formázott stringből olvas be adatokat. Alapvetően két részből állnak: egy úgynevezett "buffer"ből és egy "format"ból. A "buffer" egy pointer lesz egy karakterstringre, amiből kiolvasásra kerül majd az adat. A "format" határozza meg, az adatok hogyan kerüljenek olvasásra. Úgynevezett format-specifikátorokból áll, ezek rendre százalékjellel kezdődnek. </para>
+
+<para>
+  Lássuk a mi esetünkben ez hogy néz ki! Azt azonban fontos megemlíteni, hogy forrásunkban a "sscanf" függvénynek több előfordulása van, nem csak az, amit a következőkban meg fogunk tekinteni, azonban lényegében mind egy kaptafára épülnek, ezért úgy gondolom, elég egyet bemutatni közülük.
+</para>
+
+<para>
+Példánkban ilyennel találkozhatunk: <![CDATA[<%d %u %u %u>%n]]>. A "d" az integerekre illeszkedik, míg a "u" az unsigned integerre, vagyis az előjel nélküli integerekre. Az utolsó, "n" pedig arra fog szolgálni, hogy számon tartsa a már beolvasott karakterek számát. Az előbb mintáknak megfelelő adatok rendre a <![CDATA[<&]]> jellel bevezetett változókban kerülnek tárolásra.
+</para>
+
+<para>
+ Az beolvasandó adatok addig kerülnek feldolgozásra, míg nincs meg mind a 4 várt argumentum. (ezt láthatjuk a while ciklusfej végén- == 4 ). </para>
+
+ <para>Abban az esetben ha mind a 4 várt argumentumot sikeresen be tudtuk olvasni, az az számunkra azt jelenti, a gengsztereket jellemző mind a 4 tulajdonság meg lett adva, így ez esetben egy új Gangster kerül létrehozásra a megfelelő argumentumokkal és a "gangsters" vektorba tároljuk az "elkészült" gengszterünket..
+ Az "nn" változóban pedig tárolásra kerül az összesen beolvasott karakterek száma.</para>
+
+<para>Látható, hogy az "nn" változó a "sscanf" függvény buffer részében is megtalálható. Amint mondtam, az nem más, mint egy pointer. A "data" értékét azért növeljük minden egyes alkalommal "nn" értékével, hogy onnan olvassunk ki további adatokat, ahonnan még nem tettük azt, ezzel a még kiolvasatlan rész elejére ugrunk mindig.</para>
+
+    </section>
+
+    <section>
+        <title>SamuCam</title>
+        <para>
+          Mutassunk rá a webcam (pl. Androidos mobilod) kezelésére ebben a projektben:
+<link xlink:href="https://github.com/nbatfai/SamuCam">https://github.com/nbatfai/SamuCam</link>
+          </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hello!/SamuCam">https://github.com/grestemayster/prog2/tree/master/Hello!/SamuCam</link>
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+        <para>
+            Mivel a feladat kifejezetten a webcam kezelését kéri tőlünk, egyértelmű, hogy a "SamuCam.cpp" állományunk lesz az, amivel foglalkoznunk kell. Kezdjük is el, elemezzük ki a kódot!
+        </para>
+
+        <programlisting language="C++"><![CDATA[
+        #include "SamuCam.h"
+
+        SamuCam::SamuCam ( std::string videoStream, int width = 176, int height = 144 )
+          : videoStream ( videoStream ), width ( width ), height ( height )
+        {
+          openVideoStream();
+        }
+
+        SamuCam::~SamuCam ()
+        {
+        }
+
+        void SamuCam::openVideoStream()
+        {
+          videoCapture.open ( 0 );
+
+          videoCapture.set ( CV_CAP_PROP_FRAME_WIDTH, width );
+          videoCapture.set ( CV_CAP_PROP_FRAME_HEIGHT, height );
+          videoCapture.set ( CV_CAP_PROP_FPS, 10 );
+        }
+        ]]></programlisting>
+
+        <para>
+            Mindenekelőtt inkludáljuk a header-fájlunkat, enélkül nehézen tudna kódunk normálisan működni. Megjelenik a konstruktorunk mely 3 paraméterrel rendelkezik. Ezek a következők: videoStream, width és height. A destruktorral is itt találkozhatunk. Az "openVideoStream" függvényen belül már kezdődnek az érdekességek. Fontos beszélni a "videoCapture.open" függvényről és paraméteréről is. Kérdés, hogy miért 0-t találunk ott.. Az eszköz / device indexet találhatjuk meg ott. Ezek az indexek 0-tól kezdődnek, a 0 az alapértelmezett kamera-eszközünk indexe. De akár IP cím is állhatna ott paraméterként. </para>
+            <para>Ugyanitt történik az előbb említett objektum finomhangolása, tehát a kamera képének szélessége és magassága valamint az FPS szám megadása.
+        </para>
+         <programlisting language="C++"><![CDATA[
+
+        void SamuCam::run()
+        {
+
+          cv::CascadeClassifier faceClassifier;
+
+          std::string faceXML = "lbpcascade_frontalface.xml"; // https://github.com/Itseez/opencv/tree/master/data/lbpcascades
+
+          if ( !faceClassifier.load ( faceXML ) )
+            {
+              qDebug() << "error: cannot found" << faceXML.c_str();
+              return;
+            }
+
+          cv::Mat frame;
+        ]]></programlisting>
+
+        <para>
+            Elérkeztünk a "run" függvényhez. Szükségünk van egy CascadeClassifier-re, amit alapesetben egy adott tárgy "detektálására" szoktak használni az adott videóstreamben, OpenCV-s programokban. Esetünkben ez a "faceClassifier" lesz, aminek a feladata az arc felismerése lesz. Ahhoz viszont, hogy ez működjön, a megjegyzésben és a github repóban is található linkre kattintva le kell töltenünk egy xml fájlt, aminek tartalmát a "faceXML" stringben tárolunk majd el. Ez tartalmazza majd ténylegesen az arc felismeréséhez használatos információkat. A "load" függvénnyel működésre bírjuk az xml-t, természetesen a fájl hiányában hibaüzenettel térünk vissza.
+        </para>
+
+        <programlisting language="C++"><![CDATA[
+        while ( videoCapture.isOpened() )
+        {
+
+          QThread::msleep ( 50 );
+          while ( videoCapture.read ( frame ) )
+            {
+
+              if ( !frame.empty() )
+                {
+
+                  cv::resize ( frame, frame, cv::Size ( 176, 144 ), 0, 0, cv::INTER_CUBIC );
+
+                  std::vector<cv::Rect> faces;
+                  cv::Mat grayFrame;
+
+                  cv::cvtColor ( frame, grayFrame, cv::COLOR_BGR2GRAY );
+                  cv::equalizeHist ( grayFrame, grayFrame );
+
+                  faceClassifier.detectMultiScale ( grayFrame, faces, 1.1, 3, 0, cv::Size ( 60, 60 ) );
+
+                  if ( faces.size() > 0 )
+                    {
+
+                      cv::Mat onlyFace = frame ( faces[0] ).clone();
+
+                      QImage* face = new QImage ( onlyFace.data,
+                                                  onlyFace.cols,
+                                                  onlyFace.rows,
+                                                  onlyFace.step,
+                                                  QImage::Format_RGB888 );
+
+                      cv::Point x ( faces[0].x-1, faces[0].y-1 );
+                      cv::Point y ( faces[0].x + faces[0].width+2, faces[0].y + faces[0].height+2 );
+                      cv::rectangle ( frame, x, y, cv::Scalar ( 240, 230, 200 ) );
+
+
+                      emit  faceChanged ( face );
+                    }
+
+                  QImage*  webcam = new QImage ( frame.data,
+                                                 frame.cols,
+                                                 frame.rows,
+                                                 frame.step,
+                                                 QImage::Format_RGB888 );
+
+                  emit  webcamChanged ( webcam );
+
+                }
+
+              QThread::msleep ( 80 );
+
+            }
+        ]]></programlisting>
+
+        <para>Egy "while" függvényen belül történik a "csoda"..50 ms-onként ellenőrzi, megvan-e még nyitva kameránk. Ha meg, abban az esetben, ha a vannak képkockáink, azok a frame-ről beolvasásra majd tárolásra is kerülnek.</para> <para> A "resize" függvény segítségével átméretezésre kerül a kép. Létrehozunk egy "faces" vektort, majd a képet a "cvtColor" segítségével szürkévé alakítjuk. Ezen képpontok számára is létrehozunk egy tárolót "grayFrame" néven.</para><para> Ezt követően a "detectMultiScale" függvényt felhasználva arcokat keresünk, a megtalált arcok pedig egy "rectangle" (téglalap) kerülnek tárolásra. Az arcból "QImage" objektum készül, majd egy "webcam" névre hallgató QImage objektum is készül, mindkettő 5 paraméterrel. </para><para>Mindkét esetben találkozhatunk az "emit" függvénnyel, ami nem más, mint egy makró. A következő feladatban foglalkozunk majd részletesebben a Qt slot-signal mechanizmusával, egyelőre annyit elég tudni az "emit"ről, hogy slotok és signalok összeegyeztetésénél van szerepe.</para>
+        <para>
+            Az előbb olvasható blokkban található tartalom pedig rendre 80 ms-enként ismétlődik majd.
+        </para>
+ <programlisting language="C++"><![CDATA[
+        if ( ! videoCapture.isOpened() )
+        {
+          openVideoStream();
+        }
+        ]]></programlisting>
+
+        <para>Megvizsgáljuk azt is, megvan-e nyitva kameránk. Ellenkező esetben megteszi azt.</para>
+
+        <para>Fordítjuk és futtatjuk a kódot, és voilá! Látható, hogy sikeres volt az arcfelismerés!</para>
+
+
+
+       
+    </section>
+
+<section>
+        <title>BrainB</title>
+        <para>
+          Mutassuk be a Qt slot-signal mechanizmust ebben a projektben: <link xlink:href="https://github.com/nbatfai/esport-
+talent-search">https://github.com/nbatfai/esport-talent-search</link>
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hello!/BrainB">https://github.com/grestemayster/prog2/tree/master/Hello!/BrainB</link>
+        </para>
+         
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+
+         <para>
+            A BrainB projekttel már előző félévben, Magas szintű programozási nyelvek 1 tárgyunk során volt szerencsém találkozni. A program célja nem más, mint hogy segítse a jövő kiemelkedő esportolóinak megtalálását. A program ebben úgy segít, hogy jövő kiemelkedő esportolóinak fellelése. A program az 
+            agy kognitív képességét méri.
+        </para>
+        <para>
+             A játékos feladata a Samu Entropy nevű karakteren tartani az egérmutatót ami az idő teltével természetesen egyre nehezebb hiszen újabb és újabb Entropy karakterek jelennek meg a képernyőn. A program érzékeli, ha Samu Entropyt elvesztettük, ekkor csökkenti a többi Entropy számát. A kódok elemzése előző féléves Prog. 1-es tanulmányaink során már megtörtént ezért most arra külön nem térnék ki. Viszont akkor még nem tértünk ki a Qt slot-signal mechanizmusára, most pótoljuk be ezt és nézzük, mi is az!
+        </para>
+
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/7_1.png" scale="50"/>
+            </imageobject>
+        </mediaobject>
+        <para>A kép forrása: <link xlink:href="https://doc.qt.io/qt-5/signalsandslots.html">https://doc.qt.io/qt-5/signalsandslots.html
+        </link> 
+        </para>
+        <para>
+            Mit látunk az ábrán? Signal-okat és slot-okat. A feladat megértéséhez tisztáznunk kell a fogalmakat. A signal-ok az objektumok által kerülnek "kisugározva", lényegében jelként kiküldve többek között akkor ha az adott objektum belső állapota valami oknál fogva megváltozott. 
+        </para>
+        <para>
+            Ezekhez a signal-okhoz vannak kapcsolva a slot-ok, amik akkor kerülnek meghívásra ha a hozzájuk tartozó signal kiküldésre kerül. Ezek a slot-ok egyébként egyszerű C++ függvények, hívásuk viszont nem úgy történik, mint a hétköznapi függvényeknek. Az "emit" kulcsszóval bocsáthatók ki. Erre láthatunk példát akár a BrainBThread.cpp forrásunkban is:
+        </para>
+        <programlisting language="C++"><![CDATA[
+        emit endAndStats ( endTime );
+        ]]></programlisting>
+        <para>
+            A slot-okat a signal-okkal minden esetben egy "connect" függvénnyel kapcsolhatjuk egymáshoz. Erre programunkban két ízben láthatunk példát a "BrainBWin.cpp" fájlban.
+        </para>
+
+
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/7_2.png" scale="50"/>
+            </imageobject>
+        </mediaobject>
+
+        <para>
+          Hogyan is épül fel ez a "connect" függvény, mik az egyes paraméterek? Formailag a következőképp néz ki: "connect(első_objektum, signal, második_objektum, slot)". Az első objektum küldi magát a signalt, míg a második feladata kezelni azt.
+        </para>
+
+           <para>
+            Jogosan merül fel a kérdés, megtörténhet-e az, hogy egy signal-hoz több slot is tartozzon? Természetesen ez is lehetséges, ekkor a slot-ok egymás után sorban kerülnek végrehajtásra. Sőt, akár fordítva is történhet a dolog, több signal is kapcsolható akár egyetlen slothoz. Ha nagyon el akarunk rugaszkodni a tipikus felhasználási módtól, akár két signal egymáshoz kapcsolása is megoldható.
+        </para>
+         <para>
+          Fontos megemlíteni, hogy a mechanizmus típus biztos, vagyis a signal és a slot szignatúrájának meg kell egyeznie.
+        </para>
+
+        <para>
+          Vessünk egy pillantást a mi példánkra ismét!
+        </para>
+
+
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/7_2.png" scale="50"/>
+            </imageobject>
+        </mediaobject>
+
+
+
+        <para>Láthatjuk, hogy a slot-ok és a signal-ok paramétereinek száma és típusa vagyis szignatúrája megegyezik.</para>
+
+        <para> Az első connect értelmezése: ha a "brainBThread" objektumban a "heroesChanged" signál emittálódik, akkor az "updateHeroes" slotnak kell meghívódnia.</para>
+
+        <para>A hívott függvény:</para>
+         
+        <programlisting language="C++"><![CDATA[
+        void BrainBWin::updateHeroes ( const QImage &image, const int &x, const int &y )
+{
+
+        if ( start && !brainBThread->get_paused() ) {
+
+                int dist = ( this->mouse_x - x ) * ( this->mouse_x - x ) + ( this->mouse_y - y ) * ( this->mouse_y - y );
+
+                if ( dist > 121 ) {
+                        ++nofLost;
+                        nofFound = 0;
+                        if ( nofLost > 12 ) {
+
+                                if ( state == found && firstLost ) {
+                                        found2lost.push_back ( brainBThread->get_bps() );
+                                }
+
+                                firstLost = true;
+
+                                state = lost;
+                                nofLost = 0;
+                                //qDebug() << "LOST";
+                                //double mean = brainBThread->meanLost();
+                                //qDebug() << mean;
+
+                                brainBThread->decComp();
+                        }
+                } else {
+                        ++nofFound;
+                        nofLost = 0;
+                        if ( nofFound > 12 ) {
+
+                                if ( state == lost && firstLost ) {
+                                        lost2found.push_back ( brainBThread->get_bps() );
+                                }
+
+                                state = found;
+                                nofFound = 0;
+                                //qDebug() << "FOUND";
+                                //double mean = brainBThread->meanFound();
+                                //qDebug() << mean;
+
+                                brainBThread->incComp();
+                        }
+
+                }
+
+        }
+        pixmap = QPixmap::fromImage ( image );
+        update();
+}
+        ]]></programlisting>
+
+        <para>Ez azt eredményezi, hogy a hőseink helye megváltozik a képernyőn.</para>
+          
+         <para>
+           A második connect értelmezése: ha a "brainBThread" objektumban az "endAndStats" signál emittálódik, akkor az ugyanilyen nevű "endAndStats" slotnak kell meghívódnia.
+         </para>
+
+        <para>Meghívásra került:</para>
+         <programlisting language="C++"><![CDATA[
+        void BrainBWin::endAndStats ( const int &t )
+        {
+
+                qDebug()  << "\n\n\n";
+                qDebug()  << "Thank you for using " + appName;
+                qDebug()  << "The result can be found in the directory " + statDir;
+                qDebug()  << "\n\n\n";
+
+                save ( t );
+                close();
+        }
+        ]]></programlisting>
+
+        <para>
+            Az "endAndStats" függvény lényegében "búcsúüzenetet" dob a felhasználónak, elmenti eredményeinket egy fájlba és kilép.
+        </para>
+
+        <para>Fordítás és futtatás után már használható is:</para>
+
+
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/7_3.png" scale="40"/>
+            </imageobject>
+        </mediaobject>
+
+
+        
+    </section>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+</chapter>                
