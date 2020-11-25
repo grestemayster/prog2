@@ -62,7 +62,7 @@ class LZWtest {
             <title>JUnit teszt</title>
             <mediaobject>
             <imageobject>
-                <imagedata fileref="images/8_2.png" scale="40"/>
+                <imagedata fileref="images/8_1.png" scale="40"/>
             </imageobject>
         </mediaobject>
 
@@ -164,7 +164,11 @@ class LZWtest {
             Ezekez a gombokhoz megadunk egy id-t is, például az eső gombunk id-je: <![CDATA[android:id="@+id/button_00"]]>. Értelemszerűen a következő gombunk <![CDATA[button_01]]> lesz és ügyeljünk rá, hogy ne legyen megegyező 
             azaonosítójuk az egyes gomboknak. 
         </para>
-    
+        <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/8_2.png" scale="40"/>
+                </imageobject>
+        </mediaobject>
         </section>
     <section>
         <title>Port scan</title>        
