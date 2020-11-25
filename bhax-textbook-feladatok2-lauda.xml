@@ -187,8 +187,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         </programlisting>
         <para>
             A fenti kódcsipentben az látható, hogy van egy buttons nevű 2 dimenziós tömbünk. A <![CDATA[textViewPlayer1]]> változóban tároljuk el az egyes gombok aktuális id-jét, amit a <![CDATA[findViewById()]]> 
-            függvénnyel kereshetünk meg. Tehát az .xml fájlban "android:id<" által megadott azonosítók kerülnek ide. Ezután 2 darab for ciklussal végigzongorázunk 0-tól 3-ig, majd ebből kreálunk egy azonosítót, 
-            amit a "buttonID<" változóban tároljuk el. A <![CDATA[button[i][j].setOnClickListener()]]> fogja majd figyelni, ha az egyik gombra ráklikkelünk, ehhez szükségünk lesz a <![CDATA[View.OnClickListener]]> 
+            függvénnyel kereshetünk meg. Tehát az .xml fájlban android:id" által megadott azonosítók kerülnek ide. Ezután 2 darab for ciklussal végigzongorázunk 0-tól 3-ig, majd ebből kreálunk egy azonosítót, 
+            amit a "buttonID" változóban tároljuk el. A <![CDATA[button[i][j].setOnClickListener()]]> fogja majd figyelni, ha az egyik gombra ráklikkelünk, ehhez szükségünk lesz a <![CDATA[View.OnClickListener]]> 
             implementálására, amit a fő osztályunk címében adtunk meg. 
         </para>
         <para>
@@ -362,7 +362,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             A Junit egy egységteszt keretrendszer Java nyelvhez. Ezzel kódot tesztelő osztályokat írhatunk és futtatásával leellenőrízhetjük, hogy a programunk működése 
             a várt módon hajtódik-e végre. Ehhez előbb létre kell hoznunk egy új projektet az Eclipse szerkesztőben, majd a néhány fejezettel ezelőtti LZWBinFa.java 
             programunkat kell bemásolni. Ha ezzel megvagyunk, akkor létrehozhatunk egy JUnit tesztelőt úgy, hogy a projektunk gyökérkönyvtárra a jobb egérrel klikkelünk, 
-            majd "new > JUnit Test Case<" menüpontot válasszuk ki. Egy osztálynév megadása után klikkeljünk a finishre, majd gépekjük be a következő kódot:
+            majd "new > JUnit Test Case" menüpontot válasszuk ki. Egy osztálynév megadása után klikkeljünk a finishre, majd gépekjük be a következő kódot:
         </para>
         <programlisting language="java"><![CDATA[ 
 package Binfa;
@@ -387,7 +387,7 @@ class LZWtest {
             ]]>
         </programlisting>
         <para>
-           Ebből nekünk a "@Test<" az ami újdonság. Ezzel jelezzük a programunk számára, hogy tesztelő függvény következik. 
+           Ebből nekünk a "@Test" az ami újdonság. Ezzel jelezzük a programunk számára, hogy tesztelő függvény következik. 
            Megadunk egy input-ot, jelen esetben a feladatban található számsort, amit <![CDATA[toCharArray()]]> segítségével egyenként egy tömbbe esszük az egyeseket és a nullákat. 
            Ezután elvégzi a számításokat az LWWBinFa.java programunkban ismert módon. Végül a kapott eredményeket az <![CDATA[assertEquals()]]> függvénnyel ellenőrízzük le. Ennek elsőparamétere 
            a számunkra várt eredmény, második paramétere a kapott eredmény és végül a harmadik paraméterként azt kell megadni, hogy lehet-e deltányi eltérés. 
