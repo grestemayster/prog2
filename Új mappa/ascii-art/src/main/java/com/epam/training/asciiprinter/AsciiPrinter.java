@@ -1,4 +1,4 @@
-package com.epam.training.asciiprinter;
+package com.epam.training.AsciiPrinter;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
