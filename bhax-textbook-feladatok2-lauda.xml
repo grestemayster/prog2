@@ -13,7 +13,7 @@
             <link xlink:href="https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitok-javat/ch01.html#id527287">https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitok-javat/ch01.html#id527287</link>                 
         </para
          <para>
-            Megoldás forrása:  <link xlink:href="  "> </link>               
+            Megoldás forrása:  <link xlink:href=" https://github.com/grestemayster/prog2/tree/master/Hallo%2C%20Lauda!/PortScan ">https://github.com/grestemayster/prog2/tree/master/Hallo%2C%20Lauda!/PortScan </link>               
         </para>>
         <para>
            A kivételkezelés a szerepe, hogy a program futtatása során hiba esetén megszakítja a programot, majd kidob egy hibaüzenetet. Ha egy metódus eldob egy kivételt, a futtató 
@@ -61,7 +61,7 @@ public class KapuSzkenner {
             Írjunk egy egyszerű Androidos „játékot”! Építkezzünk például a 2. hét „Helló, Android!” feladatára!                
         </para>
         <para>
-            Megoldás forrása:  <link xlink:href="  "> </link>               
+            Megoldás forrása:  <link xlink:href=" https://github.com/grestemayster/prog2/tree/master/Hallo%2C%20Lauda!/Android "> https://github.com/grestemayster/prog2/tree/master/Hallo%2C%20Lauda!/Android </link>               
         </para>
         <para>
             Ebben a feladatban egy Tic Tac Toe nevű játékot fogunk felépíteni, amely egy olyan kétszemélyes stratégiai játék, ahol egy 3x3 mezőből álló 
@@ -342,7 +342,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             <title>Tic Tac Toe</title>
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="img/java/tictactoe.png" width="35%" format="PNG"/>
+                    <imagedata fileref="images/8_2.png" width="35%" format="PNG"/>
                 </imageobject>
             </mediaobject>   
         </figure>
@@ -351,7 +351,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     <section>
         <title>Junit teszt</title>        
         <para>
-            Megoldás forrása:  <link xlink:href="  "> </link>               
+            Megoldás forrása:  <link xlink:href=" https://github.com/grestemayster/prog2/tree/master/Hallo%2C%20Lauda!/junit "> https://github.com/grestemayster/prog2/tree/master/Hallo%2C%20Lauda!/junit</link>               
         </para>
         <para>
             A <link xlink:href="https://progpater.blog.hu/2011/03/05/labormeres_otthon_avagy_hogyan_dolgozok_fel_egy_pedat">progprater</link>
@@ -400,7 +400,7 @@ class LZWtest {
             <title>JUnit teszt</title>
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="img/java/lzwtest.png" width="80%" format="PNG"/>
+                    <imagedata fileref="images/8_1.png" width="80%" format="PNG"/>
                 </imageobject>
             </mediaobject>   
         </figure>
