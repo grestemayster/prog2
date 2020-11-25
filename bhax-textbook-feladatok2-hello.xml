@@ -21,8 +21,113 @@ Itt láthatjuk működésben az alapot:
         </para>
         <para> <function>  fejlesztés alatt... </function>     </para>
     </section>  
+       
+   
+        <para>
+            Ehhez a feladathoz létre kell hoznunk egy ".css" végződésű stylesheet fájlt, ahol a webfejlesztéshez hasonlóan szerkeszthetjük 
+            a külső megjelenést. <filename>ActivityEditor.java</filename> fájlban hozzá kell adnunk egy sort, mellyel a stylesheet fájlokat adhatunk hozzá:
+        </para>
+        <programlisting language="java"><![CDATA[ 
+scene.getStylesheets().add("style.css");
+            ]]>
+        </programlisting>
+        <para>
+            A <filename>style.css</filename> fájl tartalma az alábbi kódcsipetben látható:
+        </para>
+        <programlisting language="c++"><![CDATA[ 
+.root { 
+	-fx-accent: #70BC1D;
+	-fx-base: #262525;
+	-fx-font-size: 12pt;
+}
+                    
+.label{
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #313131;
+}
+                    
+.separator *.line { 
+   -fx-background-color: #313131;
+   -fx-text-fill: #ffffff;
+}
+                    
+.tree-cell {
+   -fx-text-fill: #ffffff;
+}
+            ]]>
+        </programlisting>
+        <para>
+            Ahol a programban módosítani kívánt részek ponttal kezdődnek, majd a programrész neve követi. A kapcsos zárójelek közé kerülnek a módosítandó adatok. 
+            A JavaFX-ben előre meg vannak adva, hogy milyen kulcszavakat kell előhívni bizonyos módosításokhoz. Erről részletesebben a 
+            <link xlink:href="https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html">https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html</link> weboldalon 
+            lehet olvasni. A fenti kódcsipetben az <![CDATA[-fx-accent]]> segítségével adjuk meg, hogy milyen színű kiemelést kapjon a ráklikkelt elem. Az <![CDATA[-fx-base]]> pedig az alapszínt adja meg. 
+            Az <![CDATA[-fx-font-size]]> értelemszerűen a szöveg méretét jelenti, jelen esetben 12pt lesz és a szöveg színének beállításához a <![CDATA[-fx-text-fill]]> kell használnunk.
+        </para>
+        <figure>
+            <title>Az átalakított program</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="img/java/javafx.png" width="40%" format="PNG"/>
+                </imageobject>
+            </mediaobject>   
+        </figure>
+        <para>
+            Az alap program ablaka az elindítás után nálam kicsiben és képernyő alsó sarkában jelent meg, ezért ahhoz, hogy megadjunk egy alap ablak méretet és hogy 
+            a program elindítása után a kijelző közepén jelenjen meg, az alébbi kódcsipetre kell módosítani a programunkat a <filename>ActivityEditor.java</filename> fájl végén:
+        </para>
+        <programlisting language="java"><![CDATA[ 
+javafx.geometry.Rectangle2D primaryScreenBounds = javafx.stage.Screen.getPrimary().getVisualBounds();
+stage.setX(primaryScreenBounds.getMinX() + primaryScreenBounds.getWidth());
+stage.setY(primaryScreenBounds.getMinY() + primaryScreenBounds.getHeight());
         
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+stage.setWidth(600);
+stage.setHeight(800);
+		
+stage.centerOnScreen(); 
+	    
+stage.show();
+            ]]>
+        </programlisting>
+        <para>
+            A <![CDATA[stage.setX()]]> és a <![CDATA[stage.setY()]]> kódsorokkal kapjuk meg az aktuális kijelzőnk méretét. Az ablakunk méretét a 
+            <![CDATA[stage.setWidth()]]> és a <![CDATA[stage.setHeight()]]> függvények segítségével módosíthatjuk, jelen esetünkben most a szélesség 600 
+            és a magasság pedig 800 lesz. Ahhoz, hogy az ablakunk középen jelenjen meg, a <![CDATA[stage.centerOnScreen()]]> automatikusan végzi el majd végül a 
+            <![CDATA[stage.show()]]> jeleníti meg számunkra a programot. 
+        </para>
+    </section>
+
+        <section>
+        <title>OOCWC Boost ASIO hálózatkezelése</title>        
+        <para>
+            <link xlink:href="https://github.com/nbatfai/robocar-emulator/blob/master/justine/rcemu/src/carlexer.ll">carlexerl.ll</link>                
+        </para>
+        <para>
+            Mutassunk rá a scanf szerepére és használatára! <link xlink:href="https://github.com/nbatfai/robocar-
+emulator/blob/master/justine/rcemu/src/carlexer.ll">carlexerl.ll</link>
+        </para>
+
+        <para>
+            A scanf kulcsszó már ismerős lehet számunkra, mert az előző fejezetben találkozhattunk vele, most ennek működését mutatom be. Először is lássuk a kódcsipetet:
+        </para>
+        <programlisting language="c++"><![CDATA[
+            while ( std::sscanf ( data+nn, "<OK %d %u %u %u>%n", &idd, &f, &t, &s, &n ) == 4 )
+                {
+                    nn += n;
+                    gangsters.push_back ( Gangster {idd, f, t, s} );
+                }]]>                
+        </programlisting>
+        <para>
+            A kód while ciklussal kezdődik, azaz addig fog lefutni, amíg be nem olvastuk az összes adatot. A "std::sscanf()" 
+            függvény első paramétere a beolvasni kívánt adatot tartalmazza, a második pedig azt, hogy milyen adatot keresünk. Ebben az esetben "OK"-val kezdődjön, 
+            majd decimális egész számot várunk, továbbá 3 darab előjel nélküli egészet (<![CDATA[%u]]>). Az <![CDATA[%n]]> a legutóbb beolvasott bájtok számát jelenti, 
+            ezt minden egyes alkalommal hozzáadjuk és eltároljuk az 
+            "nn" változóban. Ha mind a négy adat megegyezik, akkor létrehozunk egy új gangster objektumot és eltároljuk a gangsters vektorban.
+        </para>
+        <para>
+            Tehát a sscanf() függvény sztringből formázott adatot olvas, lényegében megegyezik a scanf() függvénnyel, azzal a különbséggel, hogy az előbbi a bemenetét a 
+            buffer által megadott memóriaterületről veszi. Visszatérési értéke a sikeresen beolvasott és tárolt mezők száma. 
+        </para>
+    </section>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
    
 
     <section>
