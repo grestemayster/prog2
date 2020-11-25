@@ -1,0 +1,441 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Helló, Lauda!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+
+   <section>
+        <title>Port scan</title>        
+        <para>
+            Mutassunk rá ebben a port szkennelő forrásban a kivételkezelés szerepére!
+            <link xlink:href="https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitok-javat/ch01.html#id527287">https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitok-javat/ch01.html#id527287</link>                 
+        </para
+         <para>
+            Megoldás forrása:  <link xlink:href="  "> </link>               
+        </para>>
+        <para>
+           A kivételkezelés a szerepe, hogy a program futtatása során hiba esetén megszakítja a programot, majd kidob egy hibaüzenetet. Ha egy metódus eldob egy kivételt, a futtató 
+           környezetmegpróbál a kezelésére találni valamit. 3 blokkból állhat: <![CDATA[try, catch]]> és <![CDATA[finally]]> blokkokból. A <![CDATA[try]]> a kivételkezelő első lépésének eszköze. Ide kerül 
+           az a kódcsipet, ami hibát dobhat a program futtatása során. A <![CDATA[catch]]> blokkba kerül a hibaüzenet kiíratása, a <![CDATA[finally]]> blokk pedig rendet tesz a programban, tehát például bezárja a 
+           nem használt fájlokat, amikre nem lesz már szükségünk. Most pedig nézzük meg a feladatban szereplő kódcsipetet:
+        </para>
+        <programlisting language="java"><![CDATA[ 
+public class KapuSzkenner {
+    
+    public static void main(String[] args) {
+        
+        for(int i=0; i<1024; ++i)
+            
+            try {
+                
+                java.net.Socket socket = new java.net.Socket(args[0], i);
+                
+                System.out.println(i + " figyeli");
+                
+                socket.close();
+                
+            } catch (Exception e) {
+                
+                System.out.println(i + " nem figyeli");
+                
+            }
+    } 
+}
+            ]]>
+        </programlisting>
+        <para>
+            Ez a program annyit csinál, hogy minden 1024 alatti számú gép TCP kapuival megpróbál kapcsolatot létrehozni. Minden egyes kapcsolaton végigmegy és egyesével írja ki, 
+            hogy sikerült-e vagy sem. Siker esetén például kiíratjuk, hogy az adott számút figyeli, majd bezárjuk a kapcsolatot, azonban ha nem sikerül a kapcsolat, átlépünk a catch blokkba, 
+            ahol azt íratjuk ki, hogy hanyas számú portot nem figyeli a program. 
+        </para>
+    </section>
+
+        
+
+
+     <section>
+        <title>Android Játék</title>        
+        <para>
+            Írjunk egy egyszerű Androidos „játékot”! Építkezzünk például a 2. hét „Helló, Android!” feladatára!                
+        </para>
+        <para>
+            Megoldás forrása:  <link xlink:href="  "> </link>               
+        </para>
+        <para>
+            Ebben a feladatban egy Tic Tac Toe nevű játékot fogunk felépíteni, amely egy olyan kétszemélyes stratégiai játék, ahol egy 3x3 mezőből álló 
+            táblára "X" vagy "O" jeleket teszünk. Az nyer, akinek sikerül egy vonalban 3 jelet elhelyeznie, vízszintes, függőleges vagy átlós irányba. 
+        </para>
+        <para>
+            Mivel ez egy Androidos játk lesz, ezért célszerű letölteni az Android Studio-t. Kezdésként hozzunk létre egy új prpjektet, aminek adjunk egy nevet. 
+            Én azAndroid 4.4-es verziót választottam ki, mivel úgy tűnik jelenleg ezzel a verzióban létrehozott appok az eszközök több, mint 90%-ában el fog futni. 
+            Ezután az "Empty Activity"-t kell majd kiválasztanunk. Egy kis idő elteltével az azblakon 2 fület fogunk látni: <filename>activity_main.xml</filename> és a 
+            <filename>MainActivity.java</filename>. Ezeket fogjuk majd szerkesztgetni. Először az alkalmazásunk külsejét fogjuk kódolni, amit az <filename>activity_main.xml</filename> fájlban 
+            tehetünk meg:
+        </para>
+        <programlisting language="java"><![CDATA[ 
+...
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/text_view_p1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Player 1: 0"
+            android:textSize="30sp"
+            android:freezesText="true"/>
+        <TextView
+            android:id="@+id/text_view_p2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_view_p1"
+            android:text="Player 2: 0"
+            android:textSize="30sp"
+            android:freezesText="true"/>
+        <Button
+            android:id="@+id/button_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="33dp"
+            android:text="reset" />
+    </RelativeLayout>
+...
+            ]]>
+        </programlisting>
+        <para>
+           A fenti kódcsipetben a "Player 1: 0" és a "Player 2: 0" szövegeket fogjuk megjeleníteni, továbbá lesz egy reset gombunk is. Az egyes elemek szélességét és magasságát a <![CDATA[android:layout_width]]> és a 
+           <![CDATA[android:layout_height]]> segítségével tehetünk meg. Például a szövegünk, ami a <![CDATA[TextView]]> tag-ekben találhatóak, a szélessége meg fog egyezni az eszközünk méretével (<![CDATA[match_parent]]>) 
+           és a magasság pedig automatikus lesz (<![CDATA[wrap_content]]>). Mivel megadtunk egy szövegméretet is, ezért ezzel megegyező lesz a magasságunk: <![CDATA[android:textSize="30sp"]]>. 
+        </para>
+        <programlisting language="java"><![CDATA[ 
+...
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <Button
+            android:id="@+id/button_00"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="60sp"
+            android:freezesText="true"/>
+        <Button
+            android:id="@+id/button_01"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="60sp"
+            android:freezesText="true"/>
+        <Button
+            android:id="@+id/button_02"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="60sp"
+            android:freezesText="true"/>
+    </LinearLayout>
+...
+            ]]>
+        </programlisting>
+        <para>
+            <![CDATA[LinearLayout]]> tag-ben adjuk meg a mezőnket. Mivel 3x3-as mátrixot csinálunk, ezért a fájlban három <![CDATA[LinearLayout]]>-ot fogunk létrehozni, amikben 3-3 <![CDATA[Button]]> lesz. 
+            Az első <![CDATA[LinearLayout]]> egy sorból és 3 darab teljes magasságú oszlopkból fog állni. Ha hozzáadunk még egy ilyen <![CDATA[LinearLayout]]>-ot, akkor viszont már 2 sor és 3 oszlop lesz látható és így tovább. 
+            Ezekez a gombokhoz megadunk egy id-t is, például az eső gombunk id-je: <![CDATA[android:id="@+id/button_00"]]>. Értelemszerűen a következő gombunk <![CDATA[button_01]]> lesz és ügyeljünk rá, hogy ne legyen megegyező 
+            azaonosítójuk az egyes gomboknak. 
+        </para>
+        <para>
+            A kinézettel kapcsolatbannem lesz szükség más módosításra, így nézzük a <filename>MainActivity.java</filename> fáljt: 
+        </para>
+        <programlisting language="java"><![CDATA[ 
+...
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private Button[][] buttons = new Button[3][3];
+    private boolean player1Turn = true;
+    private int roundCount;
+    private int player1Points;
+    private int player2Points;
+    private TextView textViewPlayer1;
+    private TextView textViewPlayer2;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        textViewPlayer1 = findViewById(R.id.text_view_p1);
+        textViewPlayer2 = findViewById(R.id.text_view_p2);
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++) {
+                String buttonID = "button_" + i + j;
+                int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
+                buttons[i][j] = findViewById(resID);
+                buttons[i][j].setOnClickListener(this);
+            }
+        Button buttonReset = findViewById(R.id.button_reset);
+        buttonReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetGame();
+            }
+        });
+    }
+...
+            ]]>
+        </programlisting>
+        <para>
+            A fenti kódcsipentben az látható, hogy van egy buttons nevű 2 dimenziós tömbünk. A <![CDATA[textViewPlayer1]]> változóban tároljuk el az egyes gombok aktuális id-jét, amit a <![CDATA[findViewById()]]> 
+            függvénnyel kereshetünk meg. Tehát az .xml fájlban "android:id<" által megadott azonosítók kerülnek ide. Ezután 2 darab for ciklussal végigzongorázunk 0-tól 3-ig, majd ebből kreálunk egy azonosítót, 
+            amit a "buttonID<" változóban tároljuk el. A <![CDATA[button[i][j].setOnClickListener()]]> fogja majd figyelni, ha az egyik gombra ráklikkelünk, ehhez szükségünk lesz a <![CDATA[View.OnClickListener]]> 
+            implementálására, amit a fő osztályunk címében adtunk meg. 
+        </para>
+        <para>
+            A <![CDATA[buttonReset]]> értelemszerűen a reset gombot fogja majd figyelni, amire ha ráklikkelünk, meg fogja hívni a resetGame() függvényt, amit majd később adnunk meg.
+        </para>
+        <programlisting language="java"><![CDATA[ 
+...
+    @Override
+    public void onClick(View v) {
+        if(!((Button) v).getText().toString().equals("")) {
+           return;
+        }
+        if (player1Turn) {
+            ((Button)v).setText("X");
+        } else {
+            ((Button) v).setText("O");
+        }
+        roundCount++;
+        if(checkForWin()) {
+            if (player1Turn) {
+                player1Wins();
+            } else {
+                player2Wins();
+            }
+        } else if (roundCount == 9) {
+            draw();
+        } else {
+            player1Turn = !player1Turn;
+        }
+    }    
+...
+            ]]>
+        </programlisting>
+        <para>
+            Ez a kódcsipet fogja rajzolni az X és O jeleket. Az <![CDATA[onClick(View v)]]> paraméteres függvény azt vizsgálja, hogy épp melyik ráklikkelt gombról van szó. 
+            Először megvizsgáljuk, hogy nem üres elemről van szó,tehát nincs X vagy O betűvel bejelölve. Ha ez teljesül, akkor return lesz. 
+            Ezután jön az első if elágazás, ahol azt vizsgáljuk meg, hogy az első játékos kezd-e?, azaz azt, hogy a player1Turn értéke true. Ha igen, teszünk egy X-et a klikkelt gombra, ellenkező 
+            esetben O lesz, majd a roundCount értékét eggyel megnöveljük. A második if elágazásnál a fejlécben a <![CDATA[checkForWin()]]> függvény paraméter értékét várja és azt vizsgáljuk, hogy melyik játékos nyert, illetve ha betelt az összes gomb, azaz a roundCount értéke egyenlő 
+            9-cel, akkor meghívódik a draw() függvény, mely kitölri az összes X-et és O-t. Annak megvizsgálása, hogy egy sorban ugyanoolyan jel van-e a <![CDATA[checkForWinb()]]> függvényben történik: 
+        </para>
+        <programlisting language="java"><![CDATA[ 
+...
+    private boolean checkForWin() {
+        String[][] field = new String[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                field[i][j] = buttons[i][j].getText().toString();
+            }
+        }
+        for (int i = 0; i < 3; i++) {
+            if (field[i][0].equals(field[i][1])
+                    && field[i][0].equals(field[i][2])
+                    && !field[i][0].equals("")) {
+                return true;
+            }
+        }
+        for (int i = 0; i < 3; i++) {
+            if (field[0][i].equals(field[1][i])
+                    && field[0][i].equals(field[2][i])
+                    && !field[0][i].equals("")) {
+                return true;
+            }
+        }
+        if (field[0][0].equals(field[1][1])
+                && field[0][0].equals(field[2][2])
+                && !field[0][0].equals("")) {
+            return true;
+        }
+        if (field[0][2].equals(field[1][1])
+                && field[0][2].equals(field[2][0])
+                && !field[0][2].equals("")) {
+            return true;
+        }
+        return false;
+    }
+...
+            ]]>
+        </programlisting>
+        <para>
+            Az első for ciklusban a field tömbbe tároljuk ael az aktuális gombot, majd a második for ciklusban megvizsgáljuk, hogy egy sorban van-e 3 azonos jel, ha van, akkor true értékkel tér vissza. 
+            A harmadik for ciklusban függőlegesen vizsgáljuk meg az elemeket, a negyedikben pedig átlósan még pedig úgy, hogy a bal felső sarkból indulunk ki egészen jobb alsó sarokig. Az ötödik for ciklus a negyedik 
+            tükörképe, azaz a jobb felsőtől a bal alsóig nézzük meg, hogy van e 3 ugyanolyan elem. Ha egyik for ciklus sem teljesül, akkor false értékkel térünk vissza.
+        </para>
+        <programlisting language="java"><![CDATA[ 
+...
+    private void player1Wins() {
+        player1Points++;
+        Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_SHORT).show();
+        updatePointsText();
+        resetBoard();
+    }
+    private void player2Wins() {
+        player2Points++;
+        Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_SHORT).show();
+        updatePointsText();
+        resetBoard();
+    }
+    private void draw() {
+        Toast.makeText(this, "Draw!", Toast.LENGTH_SHORT).show();
+        resetBoard();
+    }
+    private void updatePointsText() {
+        textViewPlayer1.setText("Player 1: " + player1Points);
+        textViewPlayer2.setText("Player 2: " + player2Points);
+    }
+    private void resetBoard() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                buttons[i][j].setText("");
+            }
+        }
+        roundCount = 0;
+        player1Turn = true;
+    }
+    private void resetGame() {
+        player1Points = 0;
+        player2Points =0;
+        updatePointsText();
+        resetBoard();
+    }
+...
+            ]]>
+        </programlisting>
+        <para>
+            A fenti kódcsipet nem bonyolult, csupán csak kiíratjuk, hogy melyik játékos nyert, illetve ha már nincs szabad gomb, akkor kiíratjuk, hogy "Draw!", majd újra üresek lesznek a gombok. 
+            Itt a <![CDATA[resetGame()]]> függvény kapcsolódik a reset gombhoz, ami a tábla mellett az eredményeket is lenullázza. A felugró, majd automatikusan eltűnő ablakokat a Toast függvénnyel hívhatjuk elő. 
+            Lényegében a programunk már működőképes, tehát tudunk vele játszani, azonban ha elforgatjuk a mobilunkat fekvő módba állítva a képernyőt, akkor olyan probléma figyelhető meg, hogy az adataink lenullázódtak. 
+            Ennek megoldására a az <![CDATA[onSaveInstanceState()]]> metódust kell előhívnunk. Ide mentjük majd el az activity állapotunkat egy Bundle-ban, majd a programunk elején található <![CDATA[onCreate()]]> metódusban 
+            állítjuk vissza a Bundle-ból kinyert adatokat.
+        </para>
+        <programlisting language="java"><![CDATA[ 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("roundCount", roundCount);
+        outState.putInt("player1Points", player1Points);
+        outState.putInt("player2Points", player2Points);
+        outState.putBoolean("player1Turn", player1Turn);
+    }
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        roundCount = savedInstanceState.getInt("roundCount");
+        player1Points = savedInstanceState.getInt("player1Points");
+        player2Points = savedInstanceState.getInt("player2Points");
+        player1Turn = savedInstanceState.getBoolean("player1");
+    }
+            ]]>
+        </programlisting>
+        <figure>
+            <title>Tic Tac Toe</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="img/java/tictactoe.png" width="35%" format="PNG"/>
+                </imageobject>
+            </mediaobject>   
+        </figure>
+    </section>
+
+    <section>
+        <title>Junit teszt</title>        
+        <para>
+            Megoldás forrása:  <link xlink:href="  "> </link>               
+        </para>
+        <para>
+            A <link xlink:href="https://progpater.blog.hu/2011/03/05/labormeres_otthon_avagy_hogyan_dolgozok_fel_egy_pedat">progprater</link>
+            poszt kézzel számított mélységét és szórását dolgozd be egy Junit tesztbe (sztenderd védési feladat
+            volt korábban).    
+        </para>
+        <para>
+            A Junit egy egységteszt keretrendszer Java nyelvhez. Ezzel kódot tesztelő osztályokat írhatunk és futtatásával leellenőrízhetjük, hogy a programunk működése 
+            a várt módon hajtódik-e végre. Ehhez előbb létre kell hoznunk egy új projektet az Eclipse szerkesztőben, majd a néhány fejezettel ezelőtti LZWBinFa.java 
+            programunkat kell bemásolni. Ha ezzel megvagyunk, akkor létrehozhatunk egy JUnit tesztelőt úgy, hogy a projektunk gyökérkönyvtárra a jobb egérrel klikkelünk, 
+            majd "new > JUnit Test Case<" menüpontot válasszuk ki. Egy osztálynév megadása után klikkeljünk a finishre, majd gépekjük be a következő kódot:
+        </para>
+        <programlisting language="java"><![CDATA[ 
+package Binfa;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+class LZWtest {
+	LZWBinFa testBinfa = new LZWBinFa();
+    
+    @Test
+    public void testOperator() {
+    	String input = "01111001001001000111";    
+        
+    	for(char b: input.toCharArray()){
+            testBinfa.operator(b);
+        }
+        
+        assertEquals(4, testBinfa.getMelyseg());
+        assertEquals(2.75, testBinfa.getAtlag(), 0.001);
+        assertEquals(0.957427, testBinfa.getSzoras(), 0.000001);	
+    }
+}
+            ]]>
+        </programlisting>
+        <para>
+           Ebből nekünk a "@Test<" az ami újdonság. Ezzel jelezzük a programunk számára, hogy tesztelő függvény következik. 
+           Megadunk egy input-ot, jelen esetben a feladatban található számsort, amit <![CDATA[toCharArray()]]> segítségével egyenként egy tömbbe esszük az egyeseket és a nullákat. 
+           Ezután elvégzi a számításokat az LWWBinFa.java programunkban ismert módon. Végül a kapott eredményeket az <![CDATA[assertEquals()]]> függvénnyel ellenőrízzük le. Ennek elsőparamétere 
+           a számunkra várt eredmény, második paramétere a kapott eredmény és végül a harmadik paraméterként azt kell megadni, hogy lehet-e deltányi eltérés. 
+        </para>
+        <para>
+            Ha ezzel megvagyunk, akkor elindíthatjuk a tesztelő programunkat úgy, hogy a jobb egérrel a következő menüpontokra klikkelünk: <![CDATA[Debug as > JUnit Test]]>. Ha zöld csík jelenik meg, akkor 
+            mindent jól csináltunk és azt az eredményt kaptuk, amit kézzel is kiszámoltunk:  
+        </para>
+        <figure>
+            <title>JUnit teszt</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="img/java/lzwtest.png" width="80%" format="PNG"/>
+                </imageobject>
+            </mediaobject>   
+        </figure>
+    </section> 
+        
+
+
+   <section>
+		<title>
+		EPAM: Kivételkezelés
+		</title>
+        <para>
+			Ha az input float, akkor egy ChildException-t dob, amit az első catch elkap, hisz a
+             ChildException mindig a ChildException egy instance-ja lesz. Azért nem kapja 
+             el a parent-exceptiont,
+              mert a catch block kidob a finally részig egészen, így a parentet nem tudjuk elkapni.
+		</para>
+
+        <para>
+			Ha az input string akkor egy ParentExceptiont fog dobni, amit nem más mint a
+            második catch fog elkapni, 
+            mert a szülő osztály nem instance-ja a child osztálynak, bár ez fordítva igaz,
+             de a a cath-ágak sorrendje miatt ez irreleváns itt.
+		</para>
+
+		<para>
+			Ha az Input NULL, akkor csak egy generikus "Runtime Exceptiont" dob, 
+            mert az a parent osztája mind a Parent és Child exceptionoknak,
+             azért ugye az instanceof false-t returnöl, így csak a legutolsó catch kapja el.
+		</para>
+		
+		
+	</section>
+ 
+        
+            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+</chapter>                
