@@ -26,7 +26,7 @@
             Tanulságok, tapasztalatok, magyarázat...
         </para>
         <para>
-          Tutorok: Harmati Norbert, Szegedi Csaba
+          
         </para>
        
        <para>Érdemes lenne azzal kezdeni, mi is az MNIST. Lényegében kézzel írott arab számjegyek adatbázisa, mely összesen 60000 darab 28x28 pixel méretű, greyscale PNG képállományt tartalmaz. Ez a 60000 állomány azonban alapvetően két részre bontható, hiszen 50000 darab tanítási és 10000 darab tesztelési képet tartalmaz. Előbbiek alapján tanulja meg a gép számjegyeket, majd a tanulásának eredményességét ellenőrzi 10 ezer képre nézve.</para>
@@ -176,7 +176,7 @@
         </para>
 
         <para>
-          Tutorok: Harmati Norbert, Szegedi Csaba
+      
         </para>
 
         <para>
