@@ -1,0 +1,330 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Calvin!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+
+    <section>
+        <title>MNIST</title>
+        <para>
+          Az alap feladat megoldása, +saját kézzel rajzolt képet is ismerjen fel,</para>
+          <para>
+          <link xlink:href="https://progpater.blog.hu/2016/11/13/hello_samu_a_tensorflow-bol">https://progpater.blog.hu/2016/11/13/hello_samu_a_tensorflow-bol</link> Háttérként ezt vetítsük le:
+      </para>
+      <para>
+          <link xlink:href="https://prezi.com/0u8ncvvoabcr/no-programming-programming/">https://prezi.com/0u8ncvvoabcr/no-programming-programming/</link> 
+      </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Calvin!/mnist">https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Calvin!/mnist</link>        
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+        <para>
+          Tutorok: Harmati Norbert, Szegedi Csaba
+        </para>
+       
+       <para>Érdemes lenne azzal kezdeni, mi is az MNIST. Lényegében kézzel írott arab számjegyek adatbázisa, mely összesen 60000 darab 28x28 pixel méretű, greyscale PNG képállományt tartalmaz. Ez a 60000 állomány azonban alapvetően két részre bontható, hiszen 50000 darab tanítási és 10000 darab tesztelési képet tartalmaz. Előbbiek alapján tanulja meg a gép számjegyeket, majd a tanulásának eredményességét ellenőrzi 10 ezer képre nézve.</para>
+       <para>
+         Lássuk a gépi tanulást megvalósító kódunkat!
+       </para>
+
+       <programlisting language="Python"><![CDATA[
+        import keras
+        from keras.datasets import fashion_mnist 
+        from keras.layers import Dense, Activation, Flatten, Conv2D, MaxPooling2D
+        from keras.models import Sequential
+        from keras.utils import to_categorical,np_utils
+        from PIL import Image
+        import numpy as np
+        import matplotlib.pyplot as plt
+        import tensorflow as tf
+        import os
+        ]]></programlisting>
+
+        <para>Kezdődik az egész azzal, hogy a programunk legelején importáljuk a megoldásunkhoz szükséges könyvtárakat. Számos alkalommal fordult elő, hogy ezen könyvtárak közül valamelyik nem volt megtalálható a gépemen. Ezeket mindig egy <function>pip install 'library_neve'</function> parancs segítségével orvosolni tudjuk. Példának okáért ha a matplotlib könyvtárral még nem rendelkezünk, akkor: <function>pip install matplotlib</function>. Ennek említését azért tartottam fontosnak, mert nem egyszer jött velem szemben ez a probléma a feladat megoldása során. </para>
+
+        <programlisting language="Python"><![CDATA[
+        (train_X,train_Y), (test_X,test_Y) = tf.keras.datasets.mnist.load_data()
+        ]]></programlisting>
+
+        <para>
+          Az előző sor azért felel, hogy tudjunk dolgozni az adatbázisunkkal, itt töltjük be a <function>load.data()</function> függvény segítségével. Most már rendelkezésünkre áll a több tízezer képállomány, mellyel dolgozni tudunk majd. Ezek vektorokban kerülnek tárolásra.
+        </para>
+
+        <programlisting language="Python"><![CDATA[
+        train_X = train_X.reshape(-1, 28,28, 1)
+        test_X = test_X.reshape(-1, 28,28, 1)
+        ]]></programlisting>
+
+        <para>
+          Elkészítjük a tanításra és tesztelésre használatos számok tárolására alkalmas vektorokat, melyeket a <function>reshape</function> függvény segítségével számunkra és a feladatnak megfelelő formájúra hozunk. Ez esetünkben azt jelenti, hogy 28 db. , 28 db. elemet tartalmazó vektorra bontjuk adatainkat. Az első paraméter -1, vagyis ezt minden tagra eljátsszuk. Ha más szám állna ott, például 5, akkor nyilván csak a vektor első 5 tagja került volna ilyen formában átalakításra.
+        </para>
+        <programlisting language="Python"><![CDATA[
+        train_X = train_X.astype('float32')
+        test_X = test_X.astype('float32')
+        train_X = train_X / 255
+        test_X = test_X / 255
+        ]]></programlisting>
+
+        <para>
+          A vektorok típusát átállítjuk, majd osztjuk a látható számértékkel azért, hogy a képeket alkotó képpontok értéke megfelelő legyen a lehető leggyorsabb tanítási folyamathoz.
+        </para>
+        <programlisting language="Python"><![CDATA[
+        train_Y_one_hot = to_categorical(train_Y,10)
+        test_Y_one_hot = to_categorical(test_Y,10)
+        model = Sequential()
+        ]]></programlisting>
+
+        <para>Ebben a pár sorban megjelenik az úgynevezett <function>one hot</function> encoding is. Ez azért lényeges, mert a modell nem tud kategorikus adatokkal (a <function>to_categorical</function> függvénnyel kerül ilyen formájúra) dolgozni. Ezért 0-sok és 1-esek sorozatára kerül felbontásra az adott szám. Erről az encodingról több <link xlink:href="https://subscription.packtpub.com/book/big_data_and_business_intelligence/9781789530759/3/ch03lvl1sec23/one-hot-encoding">itt</link> és <link xlink:href="https://machinelearningmastery.com/why-one-hot-encode-data-in-machine-learning/">itt</link> olvasható. Ezen túl beállításra kerül a modellünk típusa is.</para>
+        
+        <programlisting language="Python"><![CDATA[
+        model.add(Conv2D(64, (3,3), input_shape=(28, 28, 1)))
+        model.add(Activation('relu'))
+        model.add(MaxPooling2D(pool_size=(2,2)))
+
+        model.add(Conv2D(64, (3,3)))
+        model.add(Activation('relu'))
+        model.add(MaxPooling2D(pool_size=(2,2)))
+
+        model.add(Flatten())
+        model.add(Dense(64))
+
+        model.add(Dense(10))
+        model.add(Activation('softmax'))
+
+        model.compile(loss=keras.losses.categorical_crossentropy, optimizer=keras.optimizers.Adam(),metrics=['accuracy'])
+        ]]></programlisting>
+
+        <para>
+          Rendre az <function>add</function> függvényt használjuk arra, hogy modellünkhöz újabb rétegeket adjunk hozzá. Láthatunk példát az első sorban arra, hogy milyen az, mikor egy konvolúciós réteget adunk hozzá a modellünkhöz. Amit erről tudni kell: első paramétere a neuronok száma, a második az úgynevezett detektor, a harmadik pedig az input shape, mely esetünkben a 28x28-as greyscale állomány lesz. Tehát egyértelműen egy úgynevezett konvolúciós neurális hálózatunk lesz (CNN angolul), amely a képanalitika területén igen népszerű modell. A következő sorban aktiválunk egy úgynevezett ReLU-t (Rectified Linear Unit), amit ha nagyon le szeretnénk fordítani magyarra, talán a "helyesbített lineáris egység" lenne a legmegfelelőbb. Az azt követő sorban a <function>pool_size</function>-zal azt adjuk meg, mennyi adat kerüljön feldolgozásra, ennek két argumentuma van, egy függőleges és egy vízszintes érték. A <function>compile</function> függvénnyel megindul a tanítási folyamat.
+        </para>
+
+        <programlisting language="Python"><![CDATA[
+        model.fit(train_X, train_Y_one_hot, batch_size=64, epochs=1)
+
+        test_loss, test_acc = model.evaluate(test_X, test_Y_one_hot)
+        print('Test loss', test_loss)
+        print('Test accuracy', test_acc)
+
+        predictions = model.predict(test_X)
+
+        print(np.argmax(np.round(predictions[0])))
+        plt.imshow(test_X[0].reshape(28, 28), cmap = plt.cm.binary)
+        plt.show()
+        print(np.argmax(np.round(predictions[1])))
+        plt.imshow(test_X[1].reshape(28, 28), cmap = plt.cm.binary)
+        plt.show()
+        img = Image.open('one.png').convert("L")
+        img = np.resize(img,(28,28,1))
+        ]]></programlisting>
+
+        <para>
+          A <function>fit</function> függvénnyel elkezdjük beállítani a tanítás jellemzőit. Itt inkább az utolsó két paraméter érdekes. A <function>batch_size</function> a tanulási sebesség, míg az epochs az lesz, hányszor hajtsa végig a folyamatot.
+        </para>
+
+        <para>
+          Majd kiiratjuk a tanulási folyamat során való veszteséget majd a pontossági értéket is. Eltároljuk a prediction-öket majd megjelenítjük az első, majd második feldolgozott képállományunkat a gép általi prediction-nel egyetemben. A harmadik képet mi adjuk- és nyitjuk meg az <function>Image.opern</function> függvény segítségével. Mi jelen esetben egy 1-es számmal teszteltünk, lássuk, mire sikerült jutnia a modellünknek!
+        </para>
+
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/mnist1.png" scale="30"/>
+            </imageobject>
+        </mediaobject>
+
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/mnist2.png" scale="30"/>
+            </imageobject>
+        </mediaobject>
+
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/mnist3.png" scale="30"/>
+            </imageobject>
+        </mediaobject>
+
+        <para>
+          Látható, hogy igen jó százalékos pontossággal sikerült neki eltalálni a számokat. A kézzel írott 1-esünket is sikerült felismernie.
+        </para>
+
+        </section>
+
+    <section>
+        <title>CIFAR-10 -deprecated</title>
+        <para>
+          Az alap feladat megoldása, +saját fotót is ismerjen fel,
+          </para>
+          <para>
+              <link xlink:href="https://progpater.blog.hu/2016/12/10/hello_samu_a_cifar-10_tf_tutorial_peldabol">https://progpater.blog.hu/2016/12/10/hello_samu_a_cifar-10_tf_tutorial_peldabol</link>
+          </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Calvin!/Cifar-10">https://github.com/grestemayster/prog2/tree/master/Hell%C3%B3%2C%20Calvin!/Cifar-10</link>
+
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+
+        <para>
+          Tutorok: Harmati Norbert, Szegedi Csaba
+        </para>
+
+        <para>
+          A feladat hasonlít az első, MNIST-es feladatunkhoz. Az alepvető különbség az, hogy most számjegyek helyett tárgyakat, élőlényeket (összefoglalóan mondhatjuk azt, objektumokat) kell majd felismernie. Szintén 60 ezer darab képpel fog dolgozni, ugyanúgy 50 ezer tanítási és 10 ezer tesztelési képet tartalmaz. A képállományok azonban most már nem greyscale-esek, hanem RGB-sek lesznek illetve az előző méret helyett 32x32-esek. Alapvetően 10 féle dologról találhatók meg képek az adatbázisban, ezekre néhány példa: autó, szarvas vagy éppen madár.
+        </para>
+       
+        <para>
+          Azonban ahogy arra már a feladat elején utaltam, nagyrészt egyezik a megoldás logikája az első feladatunkéval. Ezzel együtt jár az is, hogy a kód sem sokban tér el tőle. Ezért ezen feladat esetében is elemzésre kerül a kód, azonban az újdonságokat az előző kódhoz képest félkövér betűvel fogom jelezni. Lássuk tehát!
+        </para>
+
+        <programlisting language="Python"><![CDATA[
+        import keras
+        from keras.datasets import fashion_mnist 
+        from keras.layers import Dense, Activation, Flatten, Conv2D, MaxPooling2D
+        from keras.models import Sequential
+        from keras.utils import to_categorical,np_utils
+        from PIL import Image
+        import numpy as np
+        import matplotlib.pyplot as plt
+        import tensorflow as tf
+        import os
+        ]]></programlisting>
+
+        <para>Ismét azzal kezdünk, hogy a programunk legelején importáljuk a megoldásunkhoz szükséges könyvtárakat. A hiányzó könyvtárakat még mindig egy <function>pip install 'library_neve'</function> parancs segítségével orvosolni tudjuk.</para>
+
+        <programlisting language="Python"><![CDATA[
+        (train_X,train_Y), (test_X,test_Y) = cifar10.load_data()
+        ]]></programlisting>
+
+        <para><emphasis role = "strong">Értelemszerű, most egy másik adatbázis képeivel dolgozunk majd, ezeket töltjük be.</emphasis></para>
+
+       <programlisting language="Python"><![CDATA[
+        train_X = train_X.reshape(-1,32,32,3)
+        test_X = test_X.reshape(-1, 32,32, 3)
+        ]]></programlisting>
+
+        <para>
+         <emphasis role = "strong">Az első paramétert leszámítva minden változik az előzőhöz képest, a lényeg viszont ugyanaz. A második és harmadik 32 lesz, hiszen 32x32-es képállományokkal lesz dolgunk, a negyedik paraméterként megadott 3-as pedig arra utal, RGB képekkel fogunk dolgozni.</emphasis> 
+        </para>
+        <programlisting language="Python"><![CDATA[
+        train_X = train_X.astype('float32')
+        test_X = test_X.astype('float32')
+        train_X = train_X / 255
+        test_X = test_X / 255
+        ]]></programlisting>
+
+        <para>
+          A vektorok típusát átállítjuk, majd osztjuk a látható számértékkel azért, hogy a képeket alkotó képpontok értéke megfelelő legyen a lehető leggyorsabb tanítási folyamathoz.
+        </para>
+        <programlisting language="Python"><![CDATA[
+        train_Y_one_hot = to_categorical(train_Y,10)
+        test_Y_one_hot = to_categorical(test_Y,10)
+        model = Sequential()
+        ]]></programlisting>
+
+        <para>Ebben a pár sorban megjelenik az úgynevezett <function>one hot</function> encoding is. Ez azért lényeges, mert a modell nem tud kategorikus adatokkal (a <function>to_categorical</function> függvénnyel kerül ilyen formájúra) dolgozni. Ezért 0-sok és 1-esek sorozatára kerül felbontásra az adott szám. Erről az encodingról több <link xlink:href="https://subscription.packtpub.com/book/big_data_and_business_intelligence/9781789530759/3/ch03lvl1sec23/one-hot-encoding">itt</link> és <link xlink:href="https://machinelearningmastery.com/why-one-hot-encode-data-in-machine-learning/">itt</link> olvasható. Ezen túl beállításra kerül a modellünk típusa is, ami szekvenciális lesz.</para>
+        
+        <programlisting language="Python"><![CDATA[
+        model.add(Conv2D(64, (3, 3), activation='relu', input_shape=(32, 32, 3)))
+        model.add(Conv2D(64, (3, 3), activation='relu'))
+        model.add(MaxPooling2D(pool_size=(2, 2)))
+
+        model.add(Flatten())
+        model.add(Dense(256))
+        model.add(Activation('relu'))
+
+        model.add(Dense(10))
+        model.add(Activation('softmax'))
+        sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+        model.compile(loss=keras.losses.categorical_crossentropy, optimizer=sgd,metrics=['accuracy'])
+        img = Image.open('allat.png').convert("L")
+        img = np.resize(img,(32,32,3))
+        im2arr = np.array(img)
+        im2arr = im2arr.reshape(1,32,32,3)
+        ]]></programlisting>
+
+        <para>
+          Rendre az <function>add</function> függvényt használjuk arra, hogy modellünkhöz újabb rétegeket adjunk hozzá. Láthatunk példát az első sorban arra, hogy milyen az, mikor egy konvolúciós réteget adunk hozzá a modellünkhöz. Amit erről tudni kell: első paramétere a neuronok száma, a második az úgynevezett detektor. <emphasis role = "strong">Mivel teljesen más jellemzőjű képállományokkal dolgozunk majd, értelemszerűen megváltoznak az <function>input_shape</function> függvény paraméterei is hiszen most már 32x32-es, ráadásul RGB-s képeket szeretnénk feldolgoztatni majd megtaníttatni. Továbbá több neuront használunk fel ez alkalommal. </emphasis> A következő sorban ismételten aktiválunk egy úgynevezett ReLU-t (Rectified Linear Unit). Ezt követően a <function>pool_size</function>-zal megadjuk, mennyi adat kerüljön feldolgozásra, ennek két argumentuma van, egy függőleges és egy vízszintes érték. A <function>compile</function> függvénnyel megindul a tanítási folyamat.
+        </para>
+
+        <programlisting language="Python"><![CDATA[
+        model.fit(train_X, train_Y_one_hot, batch_size=64, epochs=1)
+
+        test_loss, test_acc = model.evaluate(test_X, test_Y_one_hot)
+        print('Test loss', test_loss)
+        print('Test accuracy', test_acc)
+
+        predictions = model.predict(test_X)
+        cifar_classes = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+        print(cifar_classes[np.argmax(np.round(predictions[0]))])
+        plt.imshow(test_X[0].reshape(32, 32,-1), cmap = plt.cm.binary)
+        plt.show()
+        print(cifar_classes[np.argmax(np.round(predictions[526]))])
+        plt.imshow(test_X[526].reshape(32, 32,-1), cmap = plt.cm.binary)
+        plt.show()
+
+        print(cifar_classes[np.argmax(np.round(model.predict(im2arr)))],np.argmax(np.round(model.predict(im2arr))))
+        plt.imshow(im2arr[0].reshape(32,32,3),cmap = plt.cm.binary)
+        plt.show()
+        ]]></programlisting>
+
+        <para>
+          A <function>fit</function> függvénnyel elkezdjük beállítani a tanítás jellemzőit. Itt inkább az utolsó két paraméter érdekes. A <function>batch_size</function> a tanulási sebesség, míg az epochs az lesz, hányszor hajtsa végig a folyamatot.
+        </para>
+
+        <para>
+          Majd kiiratjuk a tanulási folyamat során való veszteséget majd a pontossági értéket is. Eltároljuk a prediction-öket. <emphasis role ="strong"> Fontos megemlíteni az utolsó, egyik legszembetűnőbb különbséget és egyben érdekességet az MNIST feladathoz képest. Most meg kell adnunk kézzel egy tömböt, mely tartalmazza azokat a osztályokat, lényegében tárgyainkat, melyekről képeket találhatunk adatbázisunkban. Ez lesz a <function>cifar_classes</function> tömb.</emphasis> Majd megjelenítjük az első, majd második feldolgozott képállományunkat a gép általi prediction-nel egyetemben. Utolsóként pedig az a kép kerül megjelenítésre amit mi adtunk be neki és remélhetőleg értelmezte, megtanulta. Lássuk, mire jutott:
+        </para>
+
+        
+
+        <para>Virtuális környezetben futtatjuk is:</para>
+
+
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/cifar10_1.png" scale="30"/>
+            </imageobject>
+        </mediaobject>
+
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/cifar10_2.png" scale="30"/>
+            </imageobject>
+        </mediaobject>
+
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/cifar10_3.png" scale="30"/>
+            </imageobject>
+        </mediaobject>
+
+        <para>
+          Hát...látható, ha a számokat nézzük, nem a legpontosab...Fontos hozzátenni azért azt is, hogy ha többször futtattam volna le a tanítást, sokkal pontosabb lett volna a felismerés. Amit viszont elég impresszívnek tartottam az az, hogy még ilyen pontossági mutatók mellett is képes volt értelmezni és felismerni mindhárom képet, beleértve az általam letöltött autós képet is:
+        </para>
+
+        <para>A letöltött kép forrása: <link xlink:href="https://m.blog.hu/pr/progpater/image/matchbox.png">https://m.blog.hu/pr/progpater/image/matchbox.png</link>
+            
+        </para>
+
+         <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/cifar10_4.png" scale="50"/>
+            </imageobject>
+        </mediaobject>
+
+        
+    </section>
+
+                                       
+</chapter>           
