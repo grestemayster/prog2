@@ -326,5 +326,182 @@
         
     </section>
 
+    <section>
+        <title> EPAM: Back To The Future</title>
+        <para>    Adott az alábbi kódrészlet:    </para>
+        <para>     <programlisting language="java"><![CDATA[
+        public class FutureChainingExercise {
+private static ExecutorService executorService = Executors.newFixedThreadPool(2);
+public static void main(String[] args) {
+CompletableFuture<String> longTask
+= CompletableFuture.supplyAsync(() -> {
+sleep(1000);
+return "Hello";
+}, executorService);
+CompletableFuture<String> shortTask
+= CompletableFuture.supplyAsync(() -> {
+sleep(500);
+return "Hi";
+}, executorService);
+CompletableFuture<String> mediumTask
+= CompletableFuture.supplyAsync(() -> {
+sleep(750);
+return "Hey";
+}, executorService);
+CompletableFuture<String> result
+= longTask.applyToEitherAsync(shortTask, String::toUpperCase, executorService);
+result = result.thenApply(s -> s + " World");
+CompletableFuture<Void> extraLongTask
+= CompletableFuture.supplyAsync(() -> {
+sleep(1500);
+return null;
+}, executorService);
+result = result.thenCombineAsync(mediumTask, (s1, s2) -> s2 + ", " + s1, executorService);
+System.out.println(result.getNow("Bye"));
+sleep(1500);
+System.out.println(result.getNow("Bye"));
+result.runAfterBothAsync(extraLongTask, () -> System.out.println("After both!"), executorService);
+result.whenCompleteAsync((s, throwable) -> System.out.println("Complete: " + s), executorService);
+executorService.shutdown();
+}
+/** * * @param sleeptime sleep time in milliseconds */
+private static void sleep(int sleeptime) {...}
+}
+        ]]></programlisting>   </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:  <link xlink:href="  "> </link>               
+        </para>
+        <para>
+            A kimenet:
+        </para>
+        <screen>
+            Bye
+            Hey, HELLO World
+            Complete: Hey, HELLO World
+        </screen>
+        <para> Az ExecutorService egy olyan JDK-s keretrendszer, amely lehetővé teszi, hogy egyes
+            taskok aszinkron módban fussanak. Ezért is kell példányosításkor megadni, hogy hány
+            szálat szeretnénk létrehozni: </para>
+        <programlisting language="java">
+            <![CDATA[
+   public class FutureChainingExercise {
+    private static ExecutorService executorService = Executors.newFixedThreadPool(2);         
+            ]]>
+        </programlisting>
+        <para>
+            Létrehozunk különböző hosszúságú task-okat, amelyeknek a hosszúságát az fogja befolyásolni, hogy mennyi ideig altatjuk a szálat, de egyébként csak egy 
+            szimpla string-et founk visszatéríteni eredményként. A Future interfész és ennek az implementáló osztálya, a CompletableFuture egy aszinkron módon 
+            végzett számítást/feladatot 
+            tud reprezentálni. 
+        </para>
+        <programlisting language="java">
+            <![CDATA[
+   CompletableFuture<String> longTask = CompletableFuture.supplyAsync(() -> {
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "Hello";
+        }, executorService);
+
+        CompletableFuture<String> shortTask = CompletableFuture.supplyAsync(() -> {
+            try {
+                sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "Hi";
+        }, executorService);
+
+        CompletableFuture<String> mediumTask = CompletableFuture.supplyAsync(() -> {
+            try {
+                sleep(750);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "Hey";
+        }, executorService);    
+        
+         CompletableFuture<Void> extraLongTask = CompletableFuture.supplyAsync(() -> {
+            try {
+                sleep(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }, executorService);
+            ]]>
+        </programlisting>
+        <para>
+            A taskokat a supplyAsync() metódussal adjuk meg, ahol a Supplier egy lambdafüggvény, azaz ez az elvégzendő 
+            feladat, a végrehajtó az osztályunk statikus executorService mezője.
+        </para>
+        <programlisting language="java">
+            <![CDATA[
+        CompletableFuture<String> result = longTask.applyToEitherAsync(shortTask, String::toUpperCase, executorService);
+
+        result = result.thenApply(s -> s + " World");
+            ]]>
+        </programlisting>
+        <para>
+            Az eredmény egy CompletableFuture objektum lesz.
+            Az eredményt az applyToEitherAsync() metódus fogja meghatározni. 
+            A longTask illetve a shortTask közül azt választja, amelynek a befejezése a lehető leghamarabb megtörténik.
+            Az eredményre alkamazni fogja a második paraméterként megadott toUpperCase() függvényt.
+            Ezért a kimeneten a nagybetűs HELLO jelenik meg eredményként. Utána erre az eredményre még egy lambdafüggvénnyel hozzáfűzzük a "World" szót.
+        </para>
+        <para>
+            Eddig az eredményünk a "HELLO World".
+        </para>
+        <programlisting language="java">
+            <![CDATA[
+         result = result.thenCombineAsync(mediumTask, (s1, s2) -> s2 + ", " + s1, executorService);
+            ]]>
+        </programlisting>
+        <para>
+            Ezután még egy mediumTask-al hozzáadunk egy "hey"-t az eredényhez, amellyet egy vesszővel választunk el a már meglévő eredménytől.
+            Ez a metódus megvárja, hogy mindkét CompletionStage elvégezze a feladatát.
+        </para>
+        <programlisting language="java">
+            <![CDATA[
+        System.out.println(result.getNow("Bye"));
+        sleep(1500);
+        System.out.println(result.getNow("Bye"));
+            ]]>
+        </programlisting>
+        <para>
+           Utána a getNow() lekéréssel megpróbáljuk lekérni az eredményt.Mivel az eredényünk mégnem készült el, ezért csak egy "Bye" fog megjelenni az első sorban.
+           1500 milliszekundummal később megjelenik a második sorban az eredményünk, a "Hey, HELLO World".
+        </para>
+        <programlisting language="java">
+            <![CDATA[
+        result.runAfterBothAsync(extraLongTask, () -> System.out.println("After both!"), executorService);
+        result.whenCompleteAsync((s, throwable) -> System.out.println("Complete: " + s), executorService);
+        executorService.shutdown();
+            ]]>
+        </programlisting>
+        <para>
+            Az előbb említett két utsaításból az első a runAfterBothAsync() metódus miatt vár az extraLongTask lefutására, ezért nem jelenik meg a következő sorban az "After both!"
+            A második utasítás le tud futni az executor shutdown-ja előtt, mivel már van eredménye a "result CompletionStage"-nek.
+
+        </para>
+        <para>A végeredményünk pedig nem más mint a:</para>
+        <para>
+            <function>Bye</function>
+          </para>
+          <para>
+            <function>Hey, HELLO World</function>
+          </para>
+          <para>
+            <function>Complete: Hey, HELLO World</function>
+        </para>
+        
+
+    </section>  
+        
                                        
 </chapter>           
