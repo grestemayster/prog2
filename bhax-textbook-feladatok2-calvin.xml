@@ -377,12 +377,7 @@ private static void sleep(int sleeptime) {...}
         <para>
             A kimenet:
         </para>
-        <screen>
-            Bye
-            Hey, HELLO World
-            Complete: Hey, HELLO World
-        </screen>
-        <para> Az ExecutorService egy olyan JDK-s keretrendszer, amely lehetővé teszi, hogy egyes
+       <para> Az ExecutorService egy olyan JDK-s keretrendszer, amely lehetővé teszi, hogy egyes
             taskok aszinkron módban fussanak. Ezért is kell példányosításkor megadni, hogy hány
             szálat szeretnénk létrehozni: </para>
         <programlisting language="java">
